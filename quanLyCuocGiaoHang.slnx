@@ -1,3 +1,6 @@
 <Solution>
-  <Project Path="quanLyCuocGiaoHang/quanLyCuocGiaoHang.csproj" />
+  <Project Path="BUS_QuanLyCuocGiaoHang/BUS_QuanLyCuocGiaoHang.csproj" />
+  <Project Path="DAO_QuanLyCuocGiaoHang/DAO_QuanLyCuocGiaoHang.csproj" />
+  <Project Path="DTO_QuanLyCuocGiaoHang/DTO_QuanLyCuocGiaoHang.csproj" />
+  <Project Path="quanLyCuocGiaoHang/GUI_QuanLyCuocGiaoHang.csproj" />
 </Solution>
