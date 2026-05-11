@@ -76,5 +76,15 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\BUS_QuanLyCuocGiaoHang\BUS_QuanLyCuocGiaoHang.csproj">
+      <Project>{86368d65-3be0-4637-87ea-6e0a671e270f}</Project>
+      <Name>BUS_QuanLyCuocGiaoHang</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\DTO_QuanLyCuocGiaoHang\DTO_QuanLyCuocGiaoHang.csproj">
+      <Project>{dae6cad6-91dc-4fdb-b197-5daaa0de84e2}</Project>
+      <Name>DTO_QuanLyCuocGiaoHang</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
