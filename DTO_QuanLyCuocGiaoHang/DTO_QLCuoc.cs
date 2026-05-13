@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace DTO_QuanLyCuocGiaoHang
 {
-    public class Class1
+    public class DTO_QLCuoc
     {   
     }
 }
