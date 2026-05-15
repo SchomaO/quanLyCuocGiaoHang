@@ -1,6 +1,9 @@
 <Solution>
-  <Project Path="BUS_QuanLyCuocGiaoHang/BUS_QuanLyCuocGiaoHang.csproj" />
-  <Project Path="DAO_QuanLyCuocGiaoHang/DAO_QuanLyCuocGiaoHang.csproj" />
-  <Project Path="DTO_QuanLyCuocGiaoHang/DTO_QuanLyCuocGiaoHang.csproj" />
-  <Project Path="quanLyCuocGiaoHang/GUI_QuanLyCuocGiaoHang.csproj" />
+  <Folder Name="/sql/">
+    <File Path="sql.txt" />
+  </Folder>
+  <Project Path="BUS_QuanLyCuocGiaoHang/BUS_QuanLyCuocGiaoHang.csproj" Id="86368d65-3be0-4637-87ea-6e0a671e270f" />
+  <Project Path="DAO_QuanLyCuocGiaoHang/DAO_QuanLyCuocGiaoHang.csproj" Id="269178f2-e09d-41dd-84e4-8882ca664203" />
+  <Project Path="DTO_QuanLyCuocGiaoHang/DTO_QuanLyCuocGiaoHang.csproj" Id="dae6cad6-91dc-4fdb-b197-5daaa0de84e2" />
+  <Project Path="quanLyCuocGiaoHang/GUI_QuanLyCuocGiaoHang.csproj" Id="027280d2-ee52-48a5-a13a-058f1b62ba16" />
 </Solution>

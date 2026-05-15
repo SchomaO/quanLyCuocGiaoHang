@@ -1,0 +1,46 @@
+
+-- 1. Bảng Khách hàng: Lưu thông tin người gửi và người nhận
+CREATE TABLE KhachHang (
+    MaKH INT PRIMARY KEY IDENTITY(1,1),
+    HoTen NVARCHAR(100) NOT NULL,
+    SDT NVARCHAR(15) NOT NULL,
+    DiaChi NVARCHAR(255) NOT NULL
+);
+
+-- 2. Bảng Dịch vụ: Lưu đơn giá và các loại phí cố định
+CREATE TABLE DichVu (
+    MaDV INT PRIMARY KEY IDENTITY(1,1),
+    TenDV NVARCHAR(50) NOT NULL,
+    GiaTheoKg DECIMAL(18, 2), -- Đơn giá trọng lượng
+    GiaTheoKm DECIMAL(18, 2), -- U_price trong công thức
+    PhiCoBan DECIMAL(18, 2),  -- P_base trong công thức
+    PhuPhi DECIMAL(18, 2)     -- S_serv trong công thức
+);
+
+-- 3. Bảng Đơn Vận Chuyển: Bổ sung các trường để tính công thức mới
+CREATE TABLE DonVanChuyen (
+    MaDon VARCHAR(20) PRIMARY KEY,
+    MaNguoiGui INT FOREIGN KEY REFERENCES KhachHang(MaKH),
+    MaNguoiNhan INT FOREIGN KEY REFERENCES KhachHang(MaKH),
+    MaDV INT FOREIGN KEY REFERENCES DichVu(MaDV),
+    
+    -- Các trường phục vụ tính toán W_vol và Total Fee
+    TrongLuong FLOAT,       -- W_actual
+    ChieuDai FLOAT,         -- L
+    ChieuRong FLOAT,        -- W
+    ChieuCao FLOAT,         -- H
+    KhoangCach FLOAT,       -- K_dist
+    
+    TongCuoc DECIMAL(18, 2),
+    TrangThai NVARCHAR(50),
+    NgayTao DATETIME DEFAULT GETDATE()
+);
+
+-- 4. Bảng Lịch sử trạng thái: Theo dõi quá trình vận chuyển
+CREATE TABLE LichSuTrangThai (
+    MaLS INT PRIMARY KEY IDENTITY(1,1),
+    MaDon VARCHAR(20) FOREIGN KEY REFERENCES DonVanChuyen(MaDon),
+    MocTrangThai NVARCHAR(50), -- Tiếp nhận, Đang vận chuyển, Đã giao...
+    ThoiGian DATETIME DEFAULT GETDATE(),
+    GhiChu NVARCHAR(255)
+);
