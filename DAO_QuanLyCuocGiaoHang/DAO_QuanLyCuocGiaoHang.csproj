@@ -42,11 +42,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-<<<<<<< HEAD
-    <Compile Include="Class1.cs" />
-=======
     <Compile Include="DAO_QLCuoc.cs" />
->>>>>>> 2b039564d572e8dbd56ef100043e456c2d37d80c
     <Compile Include="DBConnect.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
