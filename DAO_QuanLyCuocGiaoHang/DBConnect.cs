@@ -11,6 +11,6 @@ namespace DAO_QuanLyCuocGiaoHang
 {
     public class DBConnect
     {
-        protected SqlConnection _conn = new SqlConnection("");
+        protected SqlConnection _conn = new SqlConnection(@"Data Source=.;Initial Catalog=QuanLyCuoc;Integrated Security=True");
     }
 }
