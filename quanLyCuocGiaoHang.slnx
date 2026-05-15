@@ -1,7 +1,10 @@
 <Solution>
+<<<<<<< HEAD
   <Folder Name="/sql/">
     <File Path="sql.txt" />
   </Folder>
+=======
+>>>>>>> 2b039564d572e8dbd56ef100043e456c2d37d80c
   <Project Path="BUS_QuanLyCuocGiaoHang/BUS_QuanLyCuocGiaoHang.csproj" Id="86368d65-3be0-4637-87ea-6e0a671e270f" />
   <Project Path="DAO_QuanLyCuocGiaoHang/DAO_QuanLyCuocGiaoHang.csproj" Id="269178f2-e09d-41dd-84e4-8882ca664203" />
   <Project Path="DTO_QuanLyCuocGiaoHang/DTO_QuanLyCuocGiaoHang.csproj" Id="dae6cad6-91dc-4fdb-b197-5daaa0de84e2" />
