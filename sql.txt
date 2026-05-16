@@ -1,4 +1,4 @@
-
+create database QuanLyCuoc
 -- 1. Bảng Khách hàng: Lưu thông tin người gửi và người nhận
 CREATE TABLE KhachHang (
     MaKH INT PRIMARY KEY IDENTITY(1,1),
@@ -44,3 +44,24 @@ CREATE TABLE LichSuTrangThai (
     ThoiGian DATETIME DEFAULT GETDATE(),
     GhiChu NVARCHAR(255)
 );
+CREATE TABLE NguoiDung (
+    TenDangNhap VARCHAR(50) PRIMARY KEY,
+    MatKhau VARCHAR(50) NOT NULL, -- Trong thực tế nên mã hóa, nhưng làm bài tập lớn có thể để chuỗi thường
+    Quyen NVARCHAR(20) -- Admin, NhanVien...
+);
+insert into NguoiDung
+values
+('hieu','123','Nhanvien ');
+
+-- 1. Chèn dữ liệu mẫu vào bảng Khách hàng
+INSERT INTO KhachHang (HoTen, SDT, DiaChi) VALUES
+(N'Nguyễn Văn Khang', '0901234567', N'123 Đường Lê Lợi, Quận 1, TP.HCM'),
+(N'Trần Thị Minh Tú', '0918765432', N'456 Đường Nguyễn Huệ, Ninh Kiều, Cần Thơ'),
+(N'Lê Hoàng Nam', '0982345678', N'789 Đường Hùng Vương, Hòa Thành, Tây Ninh'),
+(N'Phạm Minh Đức', '0971122334', N'102 Lạc Long Quân, Quận 11, TP.HCM');
+
+-- 2. Chèn dữ liệu mẫu vào bảng Dịch vụ (phục vụ tính cước sau này)
+INSERT INTO DichVu (TenDV, GiaTheoKg, GiaTheoKm, PhiCoBan, PhuPhi) VALUES
+(N'Chuyển phát tiêu chuẩn', 5000, 1200, 15000, 0),
+(N'Chuyển phát nhanh', 8000, 1800, 22000, 2000),
+(N'Hỏa tốc nội đô', 12000, 2500, 35000, 5000);

@@ -11,6 +11,34 @@ namespace DAO_QuanLyCuocGiaoHang
 {
     public class DBConnect
     {
-        protected SqlConnection _conn = new SqlConnection(@"Data Source=.;Initial Catalog=QuanLyCuoc;Integrated Security=True");
+        // Khai báo đối tượng kết nối dùng chung cho các lớp con kế thừa
+        protected SqlConnection _conn;
+
+        // Thay thế chuỗi này bằng thông tin thực tế trên máy bạn
+        private string strConnect = @"Data Source=LAPTOP-T27N71PS\MSSQLSERVER02;Initial Catalog=QuanLyCuoc;Integrated Security=True";
+
+        public DBConnect()
+        {
+            // Khởi tạo đối tượng kết nối
+            _conn = new SqlConnection(strConnect);
+        }
+
+        // Hàm hỗ trợ mở kết nối an toàn
+        protected void OpenConnection()
+        {
+            if (_conn.State == ConnectionState.Closed)
+            {
+                _conn.Open();
+            }
+        }
+
+        // Hàm hỗ trợ đóng kết nối an toàn
+        protected void CloseConnection()
+        {
+            if (_conn.State == ConnectionState.Open)
+            {
+                _conn.Close();
+            }
+        }
     }
 }
