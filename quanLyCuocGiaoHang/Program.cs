@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using BUS_QuanLyCuocGiaoHang;
+using DAO_QuanLyCuocGiaoHang;
 
 namespace quanLyCuocGiaoHang
 {
@@ -17,7 +18,7 @@ namespace quanLyCuocGiaoHang
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new frmKhachHang());
+            Application.Run(new frmMain());
         }
     }
 }

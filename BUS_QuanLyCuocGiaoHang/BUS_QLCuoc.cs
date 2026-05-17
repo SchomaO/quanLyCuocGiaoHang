@@ -78,5 +78,10 @@ namespace BUS_QuanLyCuocGiaoHang
             // Nếu mọi logic hợp lệ, gọi tầng DAO để chèn vào cơ sở dữ liệu SQL Server
             return daoQLCuoc.ThemDonVanChuyen(maDon, maNguoiGui, maNguoiNhan, maDV, trongLuong, dai, rong, cao, khoangCach, tongCuoc, trangThai);
         }
+        public DataTable TranferDanhSachTheoDoi(string maDon, string trangThai)
+        {
+            // Bốc dữ liệu từ GUI và chuyển thẳng xuống DAO xử lý
+            return daoQLCuoc.LayDanhSachTheoDoi(maDon.Trim(), trangThai);
+        }
     }
 }

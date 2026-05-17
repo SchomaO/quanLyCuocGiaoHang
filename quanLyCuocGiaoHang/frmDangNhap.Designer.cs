@@ -29,13 +29,13 @@
         private void InitializeComponent()
         {
             this.panelLogin = new System.Windows.Forms.Panel();
-            this.label1 = new System.Windows.Forms.Label();
-            this.txtUser = new System.Windows.Forms.TextBox();
-            this.txtPass = new System.Windows.Forms.TextBox();
-            this.btnLogin = new System.Windows.Forms.Button();
-            this.lnkDangKy = new System.Windows.Forms.LinkLabel();
-            this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
+            this.lnkDangKy = new System.Windows.Forms.LinkLabel();
+            this.btnLogin = new System.Windows.Forms.Button();
+            this.txtPass = new System.Windows.Forms.TextBox();
+            this.txtUser = new System.Windows.Forms.TextBox();
+            this.label1 = new System.Windows.Forms.Label();
             this.panelLogin.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -57,54 +57,15 @@
             this.panelLogin.Size = new System.Drawing.Size(672, 330);
             this.panelLogin.TabIndex = 0;
             // 
-            // label1
+            // label3
             // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Segoe UI", 20F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(158, 0);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(327, 37);
-            this.label1.TabIndex = 0;
-            this.label1.Text = "ĐĂNG NHẬP HỆ THỐNG";
-            // 
-            // txtUser
-            // 
-            this.txtUser.Font = new System.Drawing.Font("Segoe UI Black", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtUser.Location = new System.Drawing.Point(246, 93);
-            this.txtUser.Name = "txtUser";
-            this.txtUser.Size = new System.Drawing.Size(273, 26);
-            this.txtUser.TabIndex = 1;
-            // 
-            // txtPass
-            // 
-            this.txtPass.Font = new System.Drawing.Font("Segoe UI Black", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtPass.Location = new System.Drawing.Point(246, 143);
-            this.txtPass.Name = "txtPass";
-            this.txtPass.Size = new System.Drawing.Size(273, 26);
-            this.txtPass.TabIndex = 2;
-            this.txtPass.UseSystemPasswordChar = true;
-            // 
-            // btnLogin
-            // 
-            this.btnLogin.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnLogin.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnLogin.Location = new System.Drawing.Point(365, 232);
-            this.btnLogin.Name = "btnLogin";
-            this.btnLogin.Size = new System.Drawing.Size(120, 39);
-            this.btnLogin.TabIndex = 3;
-            this.btnLogin.Text = "Đăng nhập";
-            this.btnLogin.UseVisualStyleBackColor = true;
-            // 
-            // lnkDangKy
-            // 
-            this.lnkDangKy.AutoSize = true;
-            this.lnkDangKy.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lnkDangKy.Location = new System.Drawing.Point(109, 243);
-            this.lnkDangKy.Name = "lnkDangKy";
-            this.lnkDangKy.Size = new System.Drawing.Size(215, 19);
-            this.lnkDangKy.TabIndex = 3;
-            this.lnkDangKy.TabStop = true;
-            this.lnkDangKy.Text = "Chưa có tài khoản? Đăng ký ngay";
+            this.label3.AutoSize = true;
+            this.label3.Font = new System.Drawing.Font("Segoe UI", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label3.Location = new System.Drawing.Point(146, 137);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(94, 28);
+            this.label3.TabIndex = 4;
+            this.label3.Text = "Mật khẩu";
             // 
             // label2
             // 
@@ -116,15 +77,56 @@
             this.label2.TabIndex = 4;
             this.label2.Text = "Tên tài khoản";
             // 
-            // label3
+            // lnkDangKy
             // 
-            this.label3.AutoSize = true;
-            this.label3.Font = new System.Drawing.Font("Segoe UI", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(146, 137);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(94, 28);
-            this.label3.TabIndex = 4;
-            this.label3.Text = "Mật khẩu";
+            this.lnkDangKy.AutoSize = true;
+            this.lnkDangKy.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lnkDangKy.Location = new System.Drawing.Point(109, 243);
+            this.lnkDangKy.Name = "lnkDangKy";
+            this.lnkDangKy.Size = new System.Drawing.Size(215, 19);
+            this.lnkDangKy.TabIndex = 3;
+            this.lnkDangKy.TabStop = true;
+            this.lnkDangKy.Text = "Chưa có tài khoản? Đăng ký ngay";
+            this.lnkDangKy.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.lnkDangKy_LinkClicked);
+            // 
+            // btnLogin
+            // 
+            this.btnLogin.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnLogin.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnLogin.Location = new System.Drawing.Point(365, 232);
+            this.btnLogin.Name = "btnLogin";
+            this.btnLogin.Size = new System.Drawing.Size(120, 39);
+            this.btnLogin.TabIndex = 3;
+            this.btnLogin.Text = "Đăng nhập";
+            this.btnLogin.UseVisualStyleBackColor = true;
+            this.btnLogin.Click += new System.EventHandler(this.btnLogin_Click);
+            // 
+            // txtPass
+            // 
+            this.txtPass.Font = new System.Drawing.Font("Segoe UI Black", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtPass.Location = new System.Drawing.Point(246, 143);
+            this.txtPass.Name = "txtPass";
+            this.txtPass.Size = new System.Drawing.Size(273, 26);
+            this.txtPass.TabIndex = 2;
+            this.txtPass.UseSystemPasswordChar = true;
+            // 
+            // txtUser
+            // 
+            this.txtUser.Font = new System.Drawing.Font("Segoe UI Black", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtUser.Location = new System.Drawing.Point(246, 93);
+            this.txtUser.Name = "txtUser";
+            this.txtUser.Size = new System.Drawing.Size(273, 26);
+            this.txtUser.TabIndex = 1;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Segoe UI", 20F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Location = new System.Drawing.Point(158, 0);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(327, 37);
+            this.label1.TabIndex = 0;
+            this.label1.Text = "ĐĂNG NHẬP HỆ THỐNG";
             // 
             // frmDangNhap
             // 

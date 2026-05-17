@@ -11,16 +11,23 @@ namespace BUS_QuanLyCuocGiaoHang
     {
         private DAO_NguoiDung daoUser = new DAO_NguoiDung();
 
-        public bool DangNhap(string user, string pass)
+        public bool DangNhap(string taiKhoan, string matKhau)
         {
-            if (string.IsNullOrEmpty(user) || string.IsNullOrEmpty(pass)) return false;
-            return daoUser.KiemTraDangNhap(user, pass);
+            if (string.IsNullOrEmpty(taiKhoan.Trim()) || string.IsNullOrEmpty(matKhau.Trim()))
+            {
+                return false;
+            }
+
+            // Gọi xuống DAO để kiểm tra xem tài khoản có tồn tại không
+            return daoUser.KiemTraDangNhap(taiKhoan.Trim(), matKhau.Trim());
         }
 
         public string DangKy(string user, string pass, string rePass)
         {
+            // Giữ nguyên bộ lọc này ở BUS để xử lý tập trung
             if (string.IsNullOrEmpty(user) || string.IsNullOrEmpty(pass))
                 return "Vui lòng nhập đầy đủ thông tin!";
+
             if (pass != rePass)
                 return "Mật khẩu xác nhận không trùng khớp!";
 
