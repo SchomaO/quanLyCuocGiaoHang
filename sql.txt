@@ -51,8 +51,8 @@ CREATE TABLE NguoiDung (
 );
 insert into NguoiDung
 values
-('hieu','123','Nhanvien ');
-
+('hieu','123','Nhanvien'),
+('tam', '12345', 'Admin');
 -- 1. Chèn dữ liệu mẫu vào bảng Khách hàng
 INSERT INTO KhachHang (HoTen, SDT, DiaChi) VALUES
 (N'Nguyễn Văn Khang', '0901234567', N'123 Đường Lê Lợi, Quận 1, TP.HCM'),
@@ -65,3 +65,27 @@ INSERT INTO DichVu (TenDV, GiaTheoKg, GiaTheoKm, PhiCoBan, PhuPhi) VALUES
 (N'Chuyển phát tiêu chuẩn', 5000, 1200, 15000, 0),
 (N'Chuyển phát nhanh', 8000, 1800, 22000, 2000),
 (N'Hỏa tốc nội đô', 12000, 2500, 35000, 5000);
+
+--Chèn dữ liệu mẫu vào bảng Lichsutrangthai
+INSERT INTO DonVanChuyen 
+(MaDon, MaNguoiGui, MaNguoiNhan, MaDV, TrongLuong, ChieuDai, ChieuRong, ChieuCao, KhoangCach, TongCuoc, TrangThai, NgayTao) 
+VALUES 
+('HD001', 1, 2, 1, 2.5, 20, 15, 10, 180.5, 246600.00, N'Đã giao thành công', '2026-05-15 08:00:00'),
+('HD002', 3, 4, 2, 5.0, 30, 25, 20, 15.2, 86360.00, N'Đang vận chuyển', '2026-05-16 10:15:00'),
+('HD003', 1, 4, 3, 1.2, 10, 10, 5, 5.0, 61900.00, N'Tiếp nhận', '2026-05-17 11:30:00');
+GO
+
+-- 2. CHÈN DỮ LIỆU LỊCH SỬ TRẠNG THÁI CHO CÁC MÃ ĐƠN TRÊN
+INSERT INTO LichSuTrangThai (MaDon, MocTrangThai, ThoiGian, GhiChu) VALUES 
+-- Lịch trình của đơn HD001
+('HD001', N'Tiếp nhận', '2026-05-15 08:05:00', N'Bưu cục Quận 1 đã nhận hàng và cân đo kích thước'),
+('HD001', N'Đang vận chuyển', '2026-05-15 13:45:00', N'Đơn hàng đã xuất kho trung chuyển TP.HCM, đang trên đường đến Cần Thơ'),
+('HD001', N'Đang vận chuyển', '2026-05-16 08:30:00', N'Hàng đã cập bến bưu cục Ninh Kiều, Cần Thơ, đang phân giao cho shipper'),
+('HD001', N'Đã giao thành công', '2026-05-16 14:20:00', N'Shipper Hoàng Nam đã giao hàng thành công. Người nhận Trần Thị Minh Tú ký xác nhận'),
+
+-- Lịch trình của đơn HD002
+('HD002', N'Tiếp nhận', '2026-05-16 10:20:00', N'Đơn hàng chuyển phát nhanh được tạo thành công hệ thống bưu cục Tây Ninh'),
+('HD002', N'Đang vận chuyển', '2026-05-17 07:00:00', N'Hàng đang được bốc xếp lên xe tải đường dài di chuyển về hướng bưu cục Quận 11, TP.HCM'),
+
+-- Lịch trình của đơn HD003
+('HD003', N'Tiếp nhận', '2026-05-17 11:35:00', N'Đã ghi nhận yêu cầu dịch vụ Hỏa tốc nội đô. Đang điều phối shipper đến lấy hàng.');
