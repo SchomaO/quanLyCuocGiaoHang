@@ -83,5 +83,17 @@ namespace BUS_QuanLyCuocGiaoHang
             // Bốc dữ liệu từ GUI và chuyển thẳng xuống DAO xử lý
             return daoQLCuoc.LayDanhSachTheoDoi(maDon.Trim(), trangThai);
         }
+        //Form GiaoHang
+        public DataTable BusTimDonHangDeGiao(string maDon)
+        {
+            if (string.IsNullOrEmpty(maDon)) return null;
+            return daoQLCuoc.TimDonHangDeGiao(maDon.Trim());
+        }
+
+        public bool BusUpdateTrangThaiThucTe(string maDon, string trangThaiMoi, string ghiChu)
+        {
+            if (string.IsNullOrEmpty(maDon) || string.IsNullOrEmpty(trangThaiMoi)) return false;
+            return daoQLCuoc.UpdateTrangThaiThucTe(maDon.Trim(), trangThaiMoi, ghiChu);
+        }
     }
 }

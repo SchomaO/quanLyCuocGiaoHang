@@ -112,5 +112,54 @@ namespace DAO_QuanLyCuocGiaoHang
                 _conn.Close();
             }
         }
+        // Hàm tìm kiếm thông tin đơn hàng cụ thể để hiển thị lên Form Giao Hàng
+        public DataTable TimDonHangDeGiao(string maDon)
+        {
+            // Lấy thông tin người nhận và trạng thái hiện tại từ bảng gốc DonVanChuyen
+            string query = @"SELECT dv.TrangThai, k.MaKH, k.HoTen, k.SDT, k.DiaChi 
+                     FROM DonVanChuyen dv
+                     INNER JOIN KhachHang k ON dv.MaNguoiNhan = k.MaKH
+                     WHERE dv.MaDon = @MaDon";
+            DataTable dt = new DataTable();
+            try
+            {
+                OpenConnection();
+                using (SqlCommand cmd = new SqlCommand(query, _conn))
+                {
+                    cmd.Parameters.AddWithValue("@MaDon", maDon);
+                    using (SqlDataAdapter da = new SqlDataAdapter(cmd))
+                    {
+                        da.Fill(dt);
+                    }
+                }
+            }
+            catch (Exception) { return null; }
+            finally { CloseConnection(); }
+            return dt;
+        }
+
+        // Hàm cập nhật kép: Đổi trạng thái ở DonVanChuyen và chèn vết mới vào LichSuTrangThai
+        public bool UpdateTrangThaiThucTe(string maDon, string trangThaiMoi, string ghiChu)
+        {
+            string query = @"
+        UPDATE DonVanChuyen SET TrangThai = @TrangThaiMoi WHERE MaDon = @MaDon;
+        INSERT INTO LichSuTrangThai (MaDon, MocTrangThai, ThoiGian, GhiChu) 
+        VALUES (@MaDon, @TrangThaiMoi, GETDATE(), @GhiChu);";
+            try
+            {
+                OpenConnection();
+                using (SqlCommand cmd = new SqlCommand(query, _conn))
+                {
+                    cmd.Parameters.AddWithValue("@MaDon", maDon);
+                    cmd.Parameters.AddWithValue("@TrangThaiMoi", trangThaiMoi);
+                    cmd.Parameters.AddWithValue("@GhiChu", string.IsNullOrEmpty(ghiChu) ? (object)DBNull.Value : ghiChu);
+
+                    int result = cmd.ExecuteNonQuery();
+                    return result > 0;
+                }
+            }
+            catch (Exception) { return false; }
+            finally { CloseConnection(); }
+        }
     }
 }
