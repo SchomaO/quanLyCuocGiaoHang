@@ -47,6 +47,7 @@
     <Compile Include="DAO_NguoiDung.cs" />
     <Compile Include="DAO_QLCuoc.cs" />
     <Compile Include="DBConnect.cs" />
+    <Compile Include="DonVanChuyenDAO.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

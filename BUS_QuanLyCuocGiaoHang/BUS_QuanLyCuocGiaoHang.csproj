@@ -48,6 +48,7 @@
     <Compile Include="BUS_KhachHang.cs" />
     <Compile Include="BUS_NguoiDung.cs" />
     <Compile Include="BUS_QLCuoc.cs" />
+    <Compile Include="DonVanChuyenBUS.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

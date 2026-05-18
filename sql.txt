@@ -35,7 +35,25 @@ CREATE TABLE DonVanChuyen (
     TrangThai NVARCHAR(50),
     NgayTao DATETIME DEFAULT GETDATE()
 );
-
+CREATE TABLE DonHang (
+    -- Mã đơn hàng tự động tăng (Khóa chính)
+    MaDonHang INT IDENTITY(1,1) PRIMARY KEY,
+    
+    -- 1. THÔNG TIN NGƯỜI GỬI
+    HoTenGui NVARCHAR(100) NOT NULL,
+    SDTGui VARCHAR(15) NOT NULL,
+    DiaChiGui NVARCHAR(255) NOT NULL,
+    MaKH VARCHAR(50) NULL, -- Cho phép trống nếu khách vãng lai (nếu có)
+    
+    -- 2. THÔNG TIN NGƯỜI NHẬN
+    HoTenNhan NVARCHAR(100) NOT NULL,
+    SDTNhan VARCHAR(15) NOT NULL,
+    DiaChiNhan NVARCHAR(255) NOT NULL,
+    TinhThanhNhan NVARCHAR(100) NOT NULL,
+    
+    -- Ngày tạo đơn (Tự động lấy ngày giờ hiện tại khi thêm mới)
+    NgayTao DATETIME DEFAULT GETDATE()
+);
 -- 4. Bảng Lịch sử trạng thái: Theo dõi quá trình vận chuyển
 CREATE TABLE LichSuTrangThai (
     MaLS INT PRIMARY KEY IDENTITY(1,1),
