@@ -14,7 +14,7 @@ namespace DAO_QuanLyCuocGiaoHang
         // Khai báo đối tượng kết nối dùng chung cho các lớp con kế thừa
         protected SqlConnection _conn;
         // Chuỗi kết nối chuẩn, tinh gọn, chạy mượt trên mọi phiên bản .NET Framework
-        private string strConnect = @"Data Source=.;Initial Catalog=QuanLyCuoc;Integrated Security=True;Connect Timeout=30;"; public DBConnect()
+        private string strConnect = @"Data Source=LAPTOP-T27N71PS\MSSQLSERVER02;Initial Catalog=QuanLyCuoc;Integrated Security=True;Connect Timeout=30;"; public DBConnect()
         {
             // Khởi tạo đối tượng kết nối
             _conn = new SqlConnection(strConnect);

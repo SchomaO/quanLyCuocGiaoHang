@@ -56,18 +56,20 @@
             this.panelDKy.Controls.Add(this.txtUserDK);
             this.panelDKy.Controls.Add(this.label1);
             this.panelDKy.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.panelDKy.Location = new System.Drawing.Point(59, 32);
+            this.panelDKy.Location = new System.Drawing.Point(79, 39);
+            this.panelDKy.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.panelDKy.Name = "panelDKy";
-            this.panelDKy.Size = new System.Drawing.Size(672, 324);
+            this.panelDKy.Size = new System.Drawing.Size(896, 399);
             this.panelDKy.TabIndex = 0;
             // 
             // label4
             // 
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Segoe UI", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.Location = new System.Drawing.Point(86, 169);
+            this.label4.Location = new System.Drawing.Point(115, 208);
+            this.label4.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(171, 28);
+            this.label4.Size = new System.Drawing.Size(218, 35);
             this.label4.TabIndex = 5;
             this.label4.Text = "Nhập lại mật khẩu";
             // 
@@ -75,9 +77,10 @@
             // 
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Segoe UI", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(163, 119);
+            this.label3.Location = new System.Drawing.Point(217, 146);
+            this.label3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(94, 28);
+            this.label3.Size = new System.Drawing.Size(118, 35);
             this.label3.TabIndex = 5;
             this.label3.Text = "Mật khẩu";
             // 
@@ -85,18 +88,20 @@
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Segoe UI", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(130, 68);
+            this.label2.Location = new System.Drawing.Point(173, 84);
+            this.label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(127, 28);
+            this.label2.Size = new System.Drawing.Size(162, 35);
             this.label2.TabIndex = 5;
             this.label2.Text = "Tên tài khoản";
             // 
             // linkLabel1
             // 
             this.linkLabel1.AutoSize = true;
-            this.linkLabel1.Location = new System.Drawing.Point(119, 252);
+            this.linkLabel1.Location = new System.Drawing.Point(159, 310);
+            this.linkLabel1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.linkLabel1.Name = "linkLabel1";
-            this.linkLabel1.Size = new System.Drawing.Size(183, 19);
+            this.linkLabel1.Size = new System.Drawing.Size(228, 23);
             this.linkLabel1.TabIndex = 4;
             this.linkLabel1.TabStop = true;
             this.linkLabel1.Text = "Đã có tài khoản? Đăng nhập";
@@ -104,9 +109,10 @@
             // 
             // btnRegister
             // 
-            this.btnRegister.Location = new System.Drawing.Point(363, 242);
+            this.btnRegister.Location = new System.Drawing.Point(484, 298);
+            this.btnRegister.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.btnRegister.Name = "btnRegister";
-            this.btnRegister.Size = new System.Drawing.Size(116, 36);
+            this.btnRegister.Size = new System.Drawing.Size(155, 44);
             this.btnRegister.TabIndex = 5;
             this.btnRegister.Text = "Đăng ký";
             this.btnRegister.UseVisualStyleBackColor = true;
@@ -115,45 +121,51 @@
             // txtRePassDK
             // 
             this.txtRePassDK.Font = new System.Drawing.Font("Segoe UI Black", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtRePassDK.Location = new System.Drawing.Point(274, 171);
+            this.txtRePassDK.Location = new System.Drawing.Point(365, 210);
+            this.txtRePassDK.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.txtRePassDK.Name = "txtRePassDK";
-            this.txtRePassDK.Size = new System.Drawing.Size(273, 26);
+            this.txtRePassDK.Size = new System.Drawing.Size(363, 30);
             this.txtRePassDK.TabIndex = 3;
             // 
             // txtPassDK
             // 
             this.txtPassDK.Font = new System.Drawing.Font("Segoe UI Black", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtPassDK.Location = new System.Drawing.Point(274, 119);
+            this.txtPassDK.Location = new System.Drawing.Point(365, 146);
+            this.txtPassDK.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.txtPassDK.Name = "txtPassDK";
-            this.txtPassDK.Size = new System.Drawing.Size(273, 26);
+            this.txtPassDK.Size = new System.Drawing.Size(363, 30);
             this.txtPassDK.TabIndex = 2;
             // 
             // txtUserDK
             // 
             this.txtUserDK.Font = new System.Drawing.Font("Segoe UI Black", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtUserDK.Location = new System.Drawing.Point(274, 70);
+            this.txtUserDK.Location = new System.Drawing.Point(365, 86);
+            this.txtUserDK.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.txtUserDK.Name = "txtUserDK";
-            this.txtUserDK.Size = new System.Drawing.Size(273, 26);
+            this.txtUserDK.Size = new System.Drawing.Size(363, 30);
             this.txtUserDK.TabIndex = 1;
             // 
             // label1
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Segoe UI", 20F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(187, 0);
+            this.label1.Location = new System.Drawing.Point(249, 0);
+            this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(292, 37);
+            this.label1.Size = new System.Drawing.Size(368, 46);
             this.label1.TabIndex = 0;
             this.label1.Text = "ĐĂNG KÝ TÀI KHOẢN";
             // 
             // frmDangKy
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.ClientSize = new System.Drawing.Size(1067, 554);
             this.Controls.Add(this.panelDKy);
+            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.Name = "frmDangKy";
             this.Text = "frmDangKy";
+            this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.panelDKy.ResumeLayout(false);
             this.panelDKy.PerformLayout();
             this.ResumeLayout(false);
