@@ -15,6 +15,7 @@ namespace quanLyCuocGiaoHang
     public partial class frmMain : Form
     {
         private bool isLoggedIn = false;
+        private string QuyenNguoiDung = "";
         public frmMain()
         {
             InitializeComponent();
@@ -36,6 +37,8 @@ namespace quanLyCuocGiaoHang
             btnReport.Enabled = false;
             btnTheodoi.Enabled = false;
             btnKhachHang.Enabled = false;
+            btnQuanLyGiaCuoc.Enabled = false; // Khóa thêm nút quản lý giá cước
+
             // 2. Chuyển nút Auth về trạng thái "Đăng nhập" màu xanh
             btnAuth.Text = "Đăng nhập";
             btnAuth.BackColor = Color.FromArgb(59, 130, 246); // Màu xanh hiện đại
@@ -62,27 +65,40 @@ namespace quanLyCuocGiaoHang
             fRegister.Show();
         }
 
-        public void DangNhapThanhCong()
+        public void DangNhapThanhCong(string quyen)
         {
-            panelMenu.Visible = true;
-            // Khi đăng nhập thành công, gọi hàm này từ frmDangNhap sang để hiện Menu làm việc lên
+            this.QuyenNguoiDung = quyen;
             isLoggedIn = true;
+            panelMenu.Visible = true;
 
-            // 1. Mở khóa toàn bộ các nút chức năng để nhân viên bấm được
+            // 1. Mở khóa toàn bộ các nút chức năng cơ bản để bấm được
             btnCalculater.Enabled = true;
             btnCreate.Enabled = true;
             btnDelivery.Enabled = true;
-            btnReport.Enabled = true;
             btnTheodoi.Enabled = true;
             btnKhachHang.Enabled = true;
+            btnQuanLyGiaCuoc.Enabled = true; // Mở khóa nút quản lý cước
 
-            // 2. BIẾN ĐỔI NÚT: Chuyển nút bấm sang chữ "Đăng xuất" màu đỏ
+            // 2. PHÂN QUYỀN ADMIN / NHÂN VIÊN TẠI ĐÂY
+            if (QuyenNguoiDung == "Nhanvien")
+            {
+                // Nếu là nhân viên, ẨN nút Quản lý giá cước và Báo cáo
+                btnQuanLyGiaCuoc.Visible = false;
+                btnReport.Visible = false;
+            }
+            else if (QuyenNguoiDung == "Admin")
+            {
+                // Nếu là Admin, HIỆN tất cả lên đầy đủ
+                btnQuanLyGiaCuoc.Visible = true;
+                btnReport.Visible = true;
+            }
+
+            // 3. Chuyển nút Auth về Đăng xuất
             btnAuth.Text = "Đăng xuất";
-            btnAuth.BackColor = Color.FromArgb(239, 68, 68); // Màu đỏ chuyên nghiệp (Crimson Red)
+            btnAuth.BackColor = Color.FromArgb(239, 68, 68);
 
-            // 3. Dọn sạch màn hình đăng nhập cũ và load Form mặc định lên luôn
             panelMain.Controls.Clear();
-            MessageBox.Show("Chào mừng bạn đã đăng nhập hệ thống!", "Thành công", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            MessageBox.Show("Chào mừng bạn đã đăng nhập hệ thống với quyền: " + quyen, "Thành công", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
         }
         // Hàm dùng chung để nhúng các form chức năng (Giao hàng, Theo dõi...)
@@ -122,6 +138,40 @@ namespace quanLyCuocGiaoHang
                 // Nếu đang Chưa Đăng Nhập mà bấm vào -> Load lại màn hình đăng nhập (đề phòng họ đang ở màn hình Đăng ký)
                 HienThiDangNhap();
             }
+        }
+
+        private void btnQuanLyGiaCuoc_Click(object sender, EventArgs e)
+        {
+            MoFormCon(new frmQuanLyGiaCuoc());
+        }
+
+        private void frmMain_Resize(object sender, EventArgs e)
+        {
+            if (this.WindowState == FormWindowState.Minimized)
+            {
+                this.Hide(); // Giấu form đi
+
+                // 1. Phải bật Visible = true TRƯỚC
+                notifyIcon1.Visible = true;
+
+                // 2. Mới gọi bong bóng thông báo SAU
+                notifyIcon1.ShowBalloonTip(2000, "Quản Lý Cước", "Phần mềm đang chạy ngầm ở đây!", ToolTipIcon.Info);
+            }
+
+        }
+
+        private void frmMain_MouseDoubleClick(object sender, MouseEventArgs e)
+        {
+            Show(); // Bật lại Form
+            this.WindowState = FormWindowState.Maximized; // Trả lại kích thước bình thường
+            notifyIcon1.Visible = false; // Tắt cái icon dưới góc đi
+        }
+
+        private void notifyIcon1_MouseDoubleClick(object sender, MouseEventArgs e)
+        {
+            this.Show(); // Hiện lại form
+            this.WindowState = FormWindowState.Maximized; // Phóng to lại kích thước bình thường
+            notifyIcon1.Visible = false; // Giấu cái icon dưới góc đi
         }
     }
 }

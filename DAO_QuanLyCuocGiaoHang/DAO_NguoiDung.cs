@@ -84,5 +84,34 @@ namespace DAO_QuanLyCuocGiaoHang
                 CloseConnection(); // Đóng kết nối an toàn
             }
         }
+        // Lấy quyền của người dùng dựa vào Tên đăng nhập
+        public string LayQuyenTaiKhoan(string taiKhoan)
+        {
+            string quyen = "";
+            try
+            {
+                OpenConnection();
+                string sql = "SELECT Quyen FROM NguoiDung WHERE TenDangNhap = @TaiKhoan";
+                SqlCommand cmd = new SqlCommand(sql, _conn);
+                cmd.Parameters.AddWithValue("@TaiKhoan", taiKhoan);
+
+                // Dùng ExecuteScalar vì ta chỉ lấy đúng 1 ô dữ liệu (ô Quyen)
+                object result = cmd.ExecuteScalar();
+
+                if (result != null)
+                {
+                    quyen = result.ToString();
+                }
+            }
+            catch
+            {
+                quyen = "";
+            }
+            finally
+            {
+                CloseConnection();
+            }
+            return quyen;
+        }
     }
 }

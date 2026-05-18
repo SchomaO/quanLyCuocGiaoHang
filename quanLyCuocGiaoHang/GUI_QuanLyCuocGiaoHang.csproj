@@ -32,6 +32,9 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>Screenshot-2026-05-18-203859.ico</ApplicationIcon>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="System">
       <HintPath>C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.7.2\System.dll</HintPath>
@@ -73,6 +76,12 @@
     <Compile Include="frmKhachHang.Designer.cs">
       <DependentUpon>frmKhachHang.cs</DependentUpon>
     </Compile>
+    <Compile Include="frmQuanLyGiaCuoc.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmQuanLyGiaCuoc.Designer.cs">
+      <DependentUpon>frmQuanLyGiaCuoc.cs</DependentUpon>
+    </Compile>
     <Compile Include="frmTheodoi.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -104,6 +113,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="frmKhachHang.resx">
       <DependentUpon>frmKhachHang.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmQuanLyGiaCuoc.resx">
+      <DependentUpon>frmQuanLyGiaCuoc.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmTheodoi.resx">
       <DependentUpon>frmTheodoi.cs</DependentUpon>
@@ -149,6 +161,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\Save.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Screenshot-2026-05-18-203859.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
