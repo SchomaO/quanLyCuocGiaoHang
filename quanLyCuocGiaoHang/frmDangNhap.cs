@@ -1,13 +1,14 @@
-﻿using System;
+﻿using BUS_QuanLyCuocGiaoHang;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.Net.NetworkInformation;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using BUS_QuanLyCuocGiaoHang;
 
 namespace quanLyCuocGiaoHang
 {
@@ -28,13 +29,22 @@ namespace quanLyCuocGiaoHang
         }
         private void btnLogin_Click(object sender, EventArgs e)
         {
-            if (busUser.DangNhap(txtUser.Text, txtPass.Text))
+            // Lấy dữ liệu (Sử dụng đúng tên TextBox mà bạn đã đặt ở giao diện Design)
+            string user = txtUser.Text.Trim();
+            string pass = txtPass.Text.Trim();
+
+            // 1. Kiểm tra xác thực (Đúng tài khoản & mật khẩu không?)
+            if (busUser.DangNhap(user, pass))
             {
-                formChinh.DangNhapThanhCong(); // Kích hoạt hiện Menu ở Trang chủ
+                // 2. Nếu đúng, chui vào Database lấy cái chữ "Admin" hoặc "Nhanvien" lên
+                string quyen = busUser.LayQuyenTruyCap(user);
+
+                // 3. Đẩy cái quyền đó sang cho Form Main xử lý ẩn/hiện nút bấm
+                formChinh.DangNhapThanhCong(quyen);
             }
             else
             {
-                MessageBox.Show("Sai tài khoản hoặc mật khẩu!");
+                MessageBox.Show("Sai tài khoản hoặc mật khẩu!", "Lỗi Đăng Nhập", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
     }

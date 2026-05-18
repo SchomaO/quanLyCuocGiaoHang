@@ -1,4 +1,5 @@
 ﻿using DAO_QuanLyCuocGiaoHang;
+using DTO_QuanLyCuocGiaoHang;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -39,6 +40,15 @@ namespace BUS_QuanLyCuocGiaoHang
         {
             // Total Fee = P_base + (W * U_price * K_dist) + S_serv
             return phiCoBan + (w_final * giaTheoKm * k_dist) + phuPhi;
+        }
+        public bool UpdateGiaCuoc(DTO_DichVu dv)
+        {
+            // Kế toán không được nhập giá âm
+            if (dv.GiaTheoKg < 0 || dv.GiaTheoKm < 0 || dv.PhiCoBan < 0 || dv.PhuPhi < 0)
+            {
+                return false;
+            }
+            return daoDV.UpdateGiaCuoc(dv);
         }
     }
 }

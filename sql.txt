@@ -113,7 +113,7 @@ INSERT INTO LichSuTrangThai (MaDon, MocTrangThai, ThoiGian, GhiChu) VALUES
 ('HD001', N'Đang vận chuyển', '2026-05-15 13:45:00', N'Đơn hàng đã xuất kho trung chuyển TP.HCM, đang trên đường đến Cần Thơ'),
 ('HD001', N'Đang vận chuyển', '2026-05-16 08:30:00', N'Hàng đã cập bến bưu cục Ninh Kiều, Cần Thơ, đang phân giao cho shipper'),
 ('HD001', N'Đã giao thành công', '2026-05-16 14:20:00', N'Shipper Hoàng Nam đã giao hàng thành công. Người nhận Trần Thị Minh Tú ký xác nhận'),
-
+B
 -- Lịch trình của đơn HD002
 ('HD002', N'Tiếp nhận', '2026-05-16 10:20:00', N'Đơn hàng chuyển phát nhanh được tạo thành công hệ thống bưu cục Tây Ninh'),
 ('HD002', N'Đang vận chuyển', '2026-05-17 07:00:00', N'Hàng đang được bốc xếp lên xe tải đường dài di chuyển về hướng bưu cục Quận 11, TP.HCM'),

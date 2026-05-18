@@ -35,5 +35,13 @@ namespace BUS_QuanLyCuocGiaoHang
             if (kq) return "Đăng ký thành công!";
             else return "Tên đăng nhập đã tồn tại hoặc xảy ra lỗi!";
         }
+        public string LayQuyenTruyCap(string taiKhoan)
+        {
+            if (string.IsNullOrEmpty(taiKhoan))
+                return "";
+
+            // Gọi xuống DAO để lấy chuỗi Quyen từ SQL
+            return daoUser.LayQuyenTaiKhoan(taiKhoan.Trim());
+        }
     }
 }
