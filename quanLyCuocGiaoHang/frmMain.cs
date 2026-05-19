@@ -103,7 +103,7 @@ namespace quanLyCuocGiaoHang
 
         }
         // Hàm dùng chung để nhúng các form chức năng (Giao hàng, Theo dõi...)
-        private void MoFormCon(Form formCon)
+        public void MoFormCon(Form formCon)
         {
             if (panelMain.Controls.Count > 0)
             {

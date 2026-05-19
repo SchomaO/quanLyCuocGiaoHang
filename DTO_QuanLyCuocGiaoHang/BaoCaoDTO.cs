@@ -10,8 +10,14 @@ namespace DTO_QuanLyCuocGiaoHang
     {
         public string MaDon { get; set; }
         public DateTime NgayTao { get; set; }
+        public string TenNguoiGui { get; set; }
+        public string TenNguoiNhan { get; set; }
         public string TenDV { get; set; }
+        public string TrangThai { get; set; }
+
+        // CHÍNH LÀ DÒNG NÀY ĐÂY: Phải có nó thì thằng BUS mới cộng số Km được!
         public double KhoangCach { get; set; }
+
         public decimal TongCuoc { get; set; }
     }
 
@@ -20,6 +26,8 @@ namespace DTO_QuanLyCuocGiaoHang
     {
         public int TongSoDon { get; set; }
         public decimal TongDoanhThu { get; set; }
-        public double TongKhoangCach { get; set; }
+
+        // Đã đổi từ TongKhoangCach sang SoDonThanhCong
+        public int SoDonThanhCong { get; set; }
     }
 }

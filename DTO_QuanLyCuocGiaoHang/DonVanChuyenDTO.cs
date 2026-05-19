@@ -8,21 +8,22 @@ namespace DTO_QuanLyCuocGiaoHang
 {
     public class DonVanChuyenDTO
     {
-        public string MaDon { get; set; }
-        public int MaNguoiGui { get; set; }
-        public int MaNguoiNhan { get; set; }
-        public int MaDV { get; set; }
+        public string HoTenGui { get; set; }
+        public string SDTGui { get; set; }
+        public string DiaChiGui { get; set; }
+        public string MaKH { get; set; } // Có thể để trống nếu là khách vãng lai
 
-        // Kích thước bưu kiện (cm)
-        public double ChieuDai { get; set; }
-        public double ChieuRong { get; set; }
-        public double ChieuCao { get; set; }
+        // 2. Thông tin người nhận
+        public string HoTenNhan { get; set; }
+        public string SDTNhan { get; set; }
+        public string DiaChiNhan { get; set; }
+        public string TinhThanhNhan { get; set; }
 
-        // Khoảng cách vận chuyển (km) - Thay cho trọng lượng cũ
+        // 3. Thông tin cước phí (Nhận từ form Tính Cước)
+        public string MaDV { get; set; }
         public double KhoangCach { get; set; }
-
-        public decimal TongCuoc { get; set; }
-        public string TrangThai { get; set; }
+        public double TienCOD { get; set; }
+        public double TongCuoc { get; set; }
     }
 }
 

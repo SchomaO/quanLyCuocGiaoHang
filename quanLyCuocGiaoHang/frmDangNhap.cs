@@ -21,6 +21,8 @@ namespace quanLyCuocGiaoHang
         {
             InitializeComponent();
             this.formChinh = mainForm; // Nhận tham chiếu từ Trang chủ
+            txtUser.Text = "tam"; 
+            txtPass.Text = "12345";
         }
         private void lnkDangKy_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {

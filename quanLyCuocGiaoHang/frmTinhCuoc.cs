@@ -96,5 +96,67 @@ namespace quanLyCuocGiaoHang
             // Đưa con trỏ chuột về lại ô đầu tiên để nhập đơn mới
             txtTrongLuong.Focus();
         }
+
+        private void btnXacNhan_Click(object sender, EventArgs e)
+        {
+            // 1. Kiểm tra xem nhân viên đã tính ra tiền chưa
+            if (string.IsNullOrEmpty(txtTongCuoc.Text))
+            {
+                MessageBox.Show("Vui lòng ấn nút 'Tính Cước' trước khi xác nhận!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            // 2. Lấy dữ liệu cước phí đang có trên màn hình
+            string maDV = cboDichVu.SelectedValue.ToString();
+            string tenDV = cboDichVu.Text;
+            double khoangCach = Convert.ToDouble(txtKhoangCach.Text);
+            double tienCOD = string.IsNullOrEmpty(txtTienCOD.Text) ? 0 : Convert.ToDouble(txtTienCOD.Text);
+
+            // Cắt bỏ chuỗi chữ dư thừa để lấy số thuần túy
+            string chuoiTien = txtTongCuoc.Text.Replace(" VNĐ", "").Replace(",", "").Trim();
+            double tongCuoc = Convert.ToDouble(chuoiTien);
+
+            // 3. XỬ LÝ THÔNG MINH 2 LUỒNG
+            frmTaoDon fTaoDon = this.Owner as frmTaoDon;
+
+            if (fTaoDon != null)
+            {
+                // TRƯỜNG HỢP 1: Form Tính Cước được gọi TỪ FORM TẠO ĐƠN (Trả dữ liệu về form cũ)
+                fTaoDon.NhanDuLieuTuFormTinhCuoc(maDV, tenDV, khoangCach, tienCOD, tongCuoc);
+                this.Close(); // Truyền xong thì đóng form tính cước lại
+            }
+            else
+            {
+                // TRƯỜNG HỢP 2: Form Tính Cước được mở ĐỘC LẬP TỪ MENU CHÍNH (Đang nằm trong Panel)
+                DialogResult dr = MessageBox.Show("Bạn có muốn dùng cước phí này để tạo đơn hàng mới luôn không?",
+                                                  "Chuyển sang Tạo Đơn",
+                                                  MessageBoxButtons.YesNo,
+                                                  MessageBoxIcon.Question);
+                if (dr == DialogResult.Yes)
+                {
+                    // Tìm chính xác cái Form Chính (frmMain) đang chạy của chương trình
+                    frmMain formChinh = Application.OpenForms["frmMain"] as frmMain;
+
+                    if (formChinh != null)
+                    {
+                        // Tạo ra một form Tạo Đơn mới tinh
+                        frmTaoDon frmMoi = new frmTaoDon();
+
+                        // Nhét trước dữ liệu cước phí vào form Tạo Đơn đó (Tự động điền vào lblTongCuoc_HienThi)
+                        frmMoi.NhanDuLieuTuFormTinhCuoc(maDV, tenDV, khoangCach, tienCOD, tongCuoc);
+
+                        // Ra lệnh cho Form Chính nhúng cái frmMoi này vào Panel bên phải để che form tính cước đi
+                        formChinh.MoFormCon(frmMoi);
+                    }
+                    else
+                    {
+                        // Phương án dự phòng nếu chạy kiểm thử không mở qua frmMain
+                        frmTaoDon frmMoi = new frmTaoDon();
+                        frmMoi.NhanDuLieuTuFormTinhCuoc(maDV, tenDV, khoangCach, tienCOD, tongCuoc);
+                        frmMoi.ShowDialog();
+                    }
+                }
+            }
+        }
     }
 }

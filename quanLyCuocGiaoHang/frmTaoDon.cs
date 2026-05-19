@@ -14,67 +14,62 @@ namespace quanLyCuocGiaoHang
 {
     public partial class frmTaoDon : Form
     {
+        private DonVanChuyenBUS _donHangBUS = new DonVanChuyenBUS();
+        private string _maDichVuAn = "";
         public frmTaoDon()
         {
             InitializeComponent();
         }
+        public void NhanDuLieuTuFormTinhCuoc(string maDV, string tenDV, double khoangCach, double tienCOD, double tongCuoc)
+        {
+            _maDichVuAn = maDV; // Lưu lại mã dịch vụ phục vụ lưu database
 
+            // Hiển thị trực quan lên 4 ô TextBox trên giao diện để nhân viên nhìn thấy
+            txtTenDV.Text = tenDV;
+            txtKhoangCach_HienThi.Text = khoangCach.ToString() + " km";
+            txtCOD_HienThi.Text = tienCOD.ToString("N0");
+            lblTongCuoc_HienThi.Text =  tongCuoc.ToString("N0");
+        }
         private void btnTaoDon_Click(object sender, EventArgs e)
         {
-            // 1. Kiểm tra điều kiện nhập xuất cơ bản (Validation)
-            if (string.IsNullOrEmpty(txtHoTenGui.Text) || string.IsNullOrEmpty(txtHoTenNhan.Text))
+            try
             {
-                MessageBox.Show("Vui lòng nhập đầy đủ họ tên người gửi và người nhận!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return;
+                // 1. Đóng gói toàn bộ thông tin trên Form vào đối tượng DTO
+                DonVanChuyenDTO donMoi = new DonVanChuyenDTO    
+                {
+                    HoTenGui = txtHoTenGui.Text.Trim(),
+                    SDTGui = txtSDTGui.Text.Trim(),
+                    DiaChiGui = txtDiaChiGui.Text.Trim(),
+                    MaKH = txtMaKHGui.Text.Trim(),
+
+                    HoTenNhan = txtHoTenNhan.Text.Trim(),
+                    SDTNhan = txtSDTNhan.Text.Trim(),
+                    DiaChiNhan = txtDiaChiNhan.Text.Trim(),
+                    TinhThanhNhan = txtTinhTPNhan.Text.Trim(),
+
+                    // Dữ liệu cước phí nhận được từ form Tính Cước
+                    MaDV = _maDichVuAn,
+                    KhoangCach = string.IsNullOrEmpty(txtKhoangCach_HienThi.Text) ? 0 : Convert.ToDouble(txtKhoangCach_HienThi.Text.Replace(" km", "")),
+                    TienCOD = string.IsNullOrEmpty(txtCOD_HienThi.Text) ? 0 : Convert.ToDouble(txtCOD_HienThi.Text.Replace(",", "")),
+                    TongCuoc = string.IsNullOrEmpty(lblTongCuoc_HienThi.Text) ? 0 : Convert.ToDouble(lblTongCuoc_HienThi.Text.Replace(",", ""))
+                };
+
+                // 2. Gửi hộp DTO sang cho tầng BUS thẩm định và xử lý
+                if (_donHangBUS.TaoDonHang(donMoi))
+                {
+                    MessageBox.Show("Hệ thống đã tạo và lưu đơn hàng thành công!", "Thành công", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    btnLamMoi_Click(null, null); // Tạo xong tự động dọn sạch form
+                }
             }
-
-            // 2. Chuỗi kết nối SQL Server (Thay bằng chuỗi của bạn nhé)
-            string connectionString = @"Data Source=DESKTOP-5K1RTKO;Initial Catalog=QuanLyCuoc;Integrated Security=True";
-
-            // 3. Câu lệnh INSERT SQL
-            string query = "INSERT INTO DonHang (HoTenGui, SDTGui, DiaChiGui, MaKH, HoTenNhan, SDTNhan, DiaChiNhan, TinhThanhNhan) " +
-                           "VALUES (@HoTenGui, @SDTGui, @DiaChiGui, @MaKH, @HoTenNhan, @SDTNhan, @DiaChiNhan, @TinhThanhNhan)";
-
-            using (SqlConnection conn = new SqlConnection(connectionString))
+            catch (ArgumentException ex)
             {
-                try
-                {
-                    conn.Open();
-                    using (SqlCommand cmd = new SqlCommand(query, conn))
-                    {
-                        // Truyền tham số để tránh SQL Injection
-                        cmd.Parameters.AddWithValue("@HoTenGui", txtHoTenGui.Text.Trim());
-                        cmd.Parameters.AddWithValue("@SDTGui", txtSDTGui.Text.Trim());
-                        cmd.Parameters.AddWithValue("@DiaChiGui", txtDiaChiGui.Text.Trim());
-
-                        // Kiểm tra mã KH nếu trống thì lưu NULL hoặc rỗng
-                        cmd.Parameters.AddWithValue("@MaKH", string.IsNullOrEmpty(txtMaKHGui.Text) ? (object)DBNull.Value : txtMaKHGui.Text.Trim());
-
-                        cmd.Parameters.AddWithValue("@HoTenNhan", txtHoTenNhan.Text.Trim());
-                        cmd.Parameters.AddWithValue("@SDTNhan", txtSDTNhan.Text.Trim());
-                        cmd.Parameters.AddWithValue("@DiaChiNhan", txtDiaChiNhan.Text.Trim());
-                        cmd.Parameters.AddWithValue("@TinhThanhNhan", txtTinhTPNhan.Text.Trim());
-
-                        // Thực thi câu lệnh
-                        int result = cmd.ExecuteNonQuery();
-
-                        if (result > 0)
-                        {
-                            MessageBox.Show("Tạo đơn hàng thành công!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
-
-                            // Tự động làm mới form sau khi thêm thành công (tùy chọn)
-                        
-                        }
-                        else
-                        {
-                            MessageBox.Show("Tạo đơn hàng thất bại.", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                        }
-                    }
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show("Lỗi kết nối database: " + ex.Message, "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
+                // Bắt các lỗi thiếu thông tin hoặc chưa tính cước phí
+                MessageBox.Show(ex.Message, "Cảnh báo nhập liệu", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+            catch (Exception ex)
+            {
+                // Bắt lỗi hệ thống hoặc SQL kết nối sập
+                MessageBox.Show("Không thể tạo đơn hàng. " + ex.Message, "Lỗi hệ thống", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -85,20 +80,24 @@ namespace quanLyCuocGiaoHang
 
         private void btnLamMoi_Click(object sender, EventArgs e)
         {
-            // Xóa sạch chữ trong các ô TextBox của Người gửi
-            txtHoTenGui.Clear();
-            txtSDTGui.Clear();
-            txtDiaChiGui.Clear();
-            txtMaKHGui.Clear();
+            txtHoTenGui.Clear(); txtSDTGui.Clear(); txtDiaChiGui.Clear(); txtMaKHGui.Clear();
+            txtHoTenNhan.Clear(); txtSDTNhan.Clear(); txtDiaChiNhan.Clear(); txtTinhTPNhan.Clear();
 
-            // Xóa sạch chữ trong các ô TextBox của Người nhận
-            txtHoTenNhan.Clear();
-            txtSDTNhan.Clear();
-            txtDiaChiNhan.Clear();
-            txtTinhTPNhan.Clear();
+            // Xóa sạch thông tin cước phí
+            _maDichVuAn = "";
+            txtTenDV.Clear();
+            txtKhoangCach_HienThi.Clear();
+            txtCOD_HienThi.Clear();
+            lblTongCuoc_HienThi.Text = " ";
 
-            // Đưa con trỏ chuột nhấp nháy về lại ô đầu tiên để người dùng nhập đơn mới
             txtHoTenGui.Focus();
+        }
+
+        private void btnGoiTinhCuoc_Click(object sender, EventArgs e)
+        {
+            frmTinhCuoc fTinhCuoc = new frmTinhCuoc();
+            fTinhCuoc.Owner = this; // Gán form Tạo Đơn làm chủ để form Tính cước tìm thấy đường gửi lời gọi về
+            fTinhCuoc.ShowDialog(); // Mở khóa màn hình Dialog độc lập
         }
     }
 }

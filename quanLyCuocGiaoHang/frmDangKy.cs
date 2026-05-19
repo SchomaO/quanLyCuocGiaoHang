@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using BUS_QuanLyCuocGiaoHang;
 
+using System.IO;
 namespace quanLyCuocGiaoHang
 {
     public partial class frmDangKy : Form
