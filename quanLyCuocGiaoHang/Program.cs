@@ -18,7 +18,7 @@ namespace quanLyCuocGiaoHang
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new frmTaoDon());
+            Application.Run(new frmMain());
         }
     }
 }

@@ -23,27 +23,28 @@ namespace quanLyCuocGiaoHang
         private void frmMain_Load(object sender, EventArgs e)
         {
             // Khi vừa mở phần mềm, ẩn Menu chính đi, chỉ hiện màn hình đăng nhập
-            panelMenu.Visible = false;
+            panelMenu.Visible = true;
             HienThiDangNhap();
         }
 
         public void HienThiDangNhap()
         {
             isLoggedIn = false;
-            //1. Khóa các nút chức năng trên Menu chính lại
+
+            // 1. Khóa các nút chức năng trên Menu (Chưa đăng nhập thì không cho bấm)
             btnCalculater.Enabled = false;
             btnCreate.Enabled = false;
             btnDelivery.Enabled = false;
             btnReport.Enabled = false;
             btnTheodoi.Enabled = false;
             btnKhachHang.Enabled = false;
-            btnQuanLyGiaCuoc.Enabled = false; // Khóa thêm nút quản lý giá cước
+            btnQuanLyGiaCuoc.Enabled = false;
 
             // 2. Chuyển nút Auth về trạng thái "Đăng nhập" màu xanh
             btnAuth.Text = "Đăng nhập";
-            btnAuth.BackColor = Color.FromArgb(59, 130, 246); // Màu xanh hiện đại
+            btnAuth.BackColor = Color.FromArgb(59, 130, 246);
 
-            // 3. Nhúng form đăng nhập vào vùng chính
+            // 3. CHÍNH LÀ NÓ: Tự động nhúng sẵn frmDangNhap vào panelMain luôn
             frmDangNhap fLogin = new frmDangNhap(this);
             fLogin.TopLevel = false;
             fLogin.FormBorderStyle = FormBorderStyle.None;
@@ -78,7 +79,7 @@ namespace quanLyCuocGiaoHang
             btnTheodoi.Enabled = true;
             btnKhachHang.Enabled = true;
             btnQuanLyGiaCuoc.Enabled = true; // Mở khóa nút quản lý cước
-
+            btnReport.Enabled = true;
             // 2. PHÂN QUYỀN ADMIN / NHÂN VIÊN TẠI ĐÂY
             if (QuyenNguoiDung == "Nhanvien")
             {
@@ -117,25 +118,25 @@ namespace quanLyCuocGiaoHang
         // Sự kiện Click các nút trên Menu
         private void btnDelivery_Click(object sender, EventArgs e) => MoFormCon(new frmGiaohang());
         private void btnTheoDoi_Click(object sender, EventArgs e) => MoFormCon(new frmTheodoi());
-        private void btnReport_Click(object sender, EventArgs e) => MoFormCon(new frmMain());
+        private void btnReport_Click(object sender, EventArgs e) => MoFormCon(new frmBaoCao());
         private void btnKhachHang_Click(object sender, EventArgs e) => MoFormCon(new frmKhachHang());
-        private void btnCreate_Click(object sender, EventArgs e) => MoFormCon(new frmMain());
+        private void btnCreate_Click(object sender, EventArgs e) => MoFormCon(new frmTaoDon());
         private void btnCalculater_Click(object sender, EventArgs e) => MoFormCon(new frmTinhCuoc());
         
         private void btnAuth_Click(object sender, EventArgs e)
         {
             if (isLoggedIn)
             {
-                // Nếu đang Đã Đăng Nhập mà người dùng bấm vào -> Nghĩa là họ muốn ĐĂNG XUẤT
+                // 1. Nếu đang Đã Đăng Nhập -> Bấm vào là để ĐĂNG XUẤT
                 DialogResult dr = MessageBox.Show("Bạn có chắc chắn muốn đăng xuất không?", "Xác nhận", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
                 if (dr == DialogResult.Yes)
                 {
-                    HienThiDangNhap(); // Gọi hàm này nó sẽ tự khóa chức năng và chuyển nút về màu xanh lại
+                    HienThiDangNhap(); // Gọi hàm này nó sẽ tự khóa chức năng và hiện sẵn form đăng nhập lại
                 }
             }
             else
             {
-                // Nếu đang Chưa Đăng Nhập mà bấm vào -> Load lại màn hình đăng nhập (đề phòng họ đang ở màn hình Đăng ký)
+                // 2. Nếu đang Chưa Đăng Nhập -> Load lại màn hình đăng nhập (đề phòng họ đang ở màn hình Đăng ký)
                 HienThiDangNhap();
             }
         }
