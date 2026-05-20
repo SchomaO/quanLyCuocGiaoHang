@@ -24,6 +24,10 @@ namespace DTO_QuanLyCuocGiaoHang
         public double KhoangCach { get; set; }
         public double TienCOD { get; set; }
         public double TongCuoc { get; set; }
+        public double TrongLuong { get; set; }
+        public double ChieuDai { get; set; }
+        public double ChieuRong { get; set; }
+        public double ChieuCao { get; set; }
     }
 }
 

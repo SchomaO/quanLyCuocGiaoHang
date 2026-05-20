@@ -14,6 +14,7 @@ namespace quanLyCuocGiaoHang
 {
     public partial class frmTaoDon : Form
     {
+        private BUS_DichVu _busDichVu = new BUS_DichVu(); 
         private DonVanChuyenBUS _donHangBUS = new DonVanChuyenBUS();
         private string _maDichVuAn = "";
         public frmTaoDon()
@@ -85,7 +86,7 @@ namespace quanLyCuocGiaoHang
 
             // Xóa sạch thông tin cước phí
             _maDichVuAn = "";
-            txtTenDV.Clear();
+            //txtTenDV.Clear();
             txtKhoangCach_HienThi.Clear();
             txtCOD_HienThi.Clear();
             lblTongCuoc_HienThi.Text = " ";
@@ -100,6 +101,21 @@ namespace quanLyCuocGiaoHang
             {
                 // Nạp 'this' (chính là Form Tạo Đơn hiện tại) vào trong ruột frmTinhCuoc
                 fMain.MoFormCon(new frmTinhCuoc(this));
+            }
+        }
+
+        private void frmTaoDon_Load(object sender, EventArgs e)
+        {
+            try
+            {
+                DataTable dtDichVu = _busDichVu.GetDanhSachDichVu();
+                txtTenDV.DataSource = dtDichVu;
+                txtTenDV.DisplayMember = "TenDV"; // Hiện chữ cho nhân viên xem
+                txtTenDV.ValueMember = "MaDV";    // Giữ mã số (1, 2, 3...) để lưu SQL
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Lỗi tải danh sách dịch vụ: " + ex.Message);
             }
         }
     }

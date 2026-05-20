@@ -12,49 +12,40 @@ namespace DAO_QuanLyCuocGiaoHang
     {
         public bool ThemDonHangMoi(DonVanChuyenDTO dh)
         {
-            // Câu lệnh INSERT đẩy đủ các trường thông tin khách hàng và cước phí
-            string query = @"INSERT INTO DonHang 
-                             (HoTenGui, SDTGui, DiaChiGui, MaKH, HoTenNhan, SDTNhan, DiaChiNhan, TinhThanhNhan, MaDV, KhoangCach, TienCOD, TongCuoc) 
-                             VALUES 
-                             (@HoTenGui, @SDTGui, @DiaChiGui, @MaKH, @HoTenNhan, @SDTNhan, @DiaChiNhan, @TinhThanhNhan, @MaDV, @KhoangCach, @TienCOD, @TongCuoc)";
+            // 1. Câu lệnh SQL khớp hoàn toàn với các Parameters ở dưới
+            string query = @"INSERT INTO DonVanChuyen 
+                     (MaDon, MaNguoiGui, MaNguoiNhan, MaDV, TrongLuong, ChieuDai, ChieuRong, ChieuCao, KhoangCach, TongCuoc, TrangThai, NgayTao) 
+                     VALUES 
+                     (@MaDon, @MaNguoiGui, @MaNguoiNhan, @MaDV, @TrongLuong, @ChieuDai, @ChieuRong, @ChieuCao, @KhoangCach, @TongCuoc, N'Chờ xử lý', GETDATE())";
             try
             {
-                // Mở kết nối dùng chung từ DBConnect
                 OpenConnection();
-
                 using (SqlCommand cmd = new SqlCommand(query, _conn))
                 {
-                    // Tham số người gửi
-                    cmd.Parameters.AddWithValue("@HoTenGui", dh.HoTenGui);
-                    cmd.Parameters.AddWithValue("@SDTGui", dh.SDTGui);
-                    cmd.Parameters.AddWithValue("@DiaChiGui", dh.DiaChiGui);
-                    cmd.Parameters.AddWithValue("@MaKH", string.IsNullOrEmpty(dh.MaKH) ? (object)DBNull.Value : dh.MaKH);
+                    // 2. Phải thêm ĐỦ và ĐÚNG tên tham số như trong câu lệnh SQL ở trên
+                    cmd.Parameters.AddWithValue("@MaDon", "HD" + DateTime.Now.Ticks.ToString().Substring(10));
 
-                    // Tham số người nhận
-                    cmd.Parameters.AddWithValue("@HoTenNhan", dh.HoTenNhan);
-                    cmd.Parameters.AddWithValue("@SDTNhan", dh.SDTNhan);
-                    cmd.Parameters.AddWithValue("@DiaChiNhan", dh.DiaChiNhan);
-                    cmd.Parameters.AddWithValue("@TinhThanhNhan", dh.TinhThanhNhan);
+                    // LƯU Ý: Đây là ID (INT), bạn phải có logic lấy ID từ tên khách hàng 
+                    // Nếu bảng DonVanChuyen của bạn đã được thiết kế lại để lưu tên trực tiếp, hãy đổi @MaNguoiGui thành @HoTenGui
+                    cmd.Parameters.AddWithValue("@MaNguoiGui", 1); // Thay 1 bằng biến ID thực tế của bạn
+                    cmd.Parameters.AddWithValue("@MaNguoiNhan", 2); // Thay 2 bằng biến ID thực tế của bạn
 
-                    // Tham số cước phí (Lấy từ kết quả tính cước)
                     cmd.Parameters.AddWithValue("@MaDV", dh.MaDV);
+                    cmd.Parameters.AddWithValue("@TrongLuong", dh.TrongLuong);
+                    cmd.Parameters.AddWithValue("@ChieuDai", dh.ChieuDai);
+                    cmd.Parameters.AddWithValue("@ChieuRong", dh.ChieuRong);
+                    cmd.Parameters.AddWithValue("@ChieuCao", dh.ChieuCao);
                     cmd.Parameters.AddWithValue("@KhoangCach", dh.KhoangCach);
-                    cmd.Parameters.AddWithValue("@TienCOD", dh.TienCOD);
                     cmd.Parameters.AddWithValue("@TongCuoc", dh.TongCuoc);
 
-                    int result = cmd.ExecuteNonQuery();
-                    return result > 0; // Trả về true nếu chèn thành công dòng dữ liệu
+                    return cmd.ExecuteNonQuery() > 0;
                 }
             }
             catch (Exception ex)
             {
-                throw new Exception("Lỗi Database khi thực hiện tạo đơn: " + ex.Message);
+                throw new Exception("Lỗi Database: " + ex.Message);
             }
-            finally
-            {
-                // Đóng kết nối an toàn
-                CloseConnection();
-            }
+            finally { CloseConnection(); }
         }
     }
 }

@@ -53,13 +53,13 @@
             this.label11 = new System.Windows.Forms.Label();
             this.txtKhoangCach_HienThi = new System.Windows.Forms.TextBox();
             this.label10 = new System.Windows.Forms.Label();
-            this.txtTenDV = new System.Windows.Forms.TextBox();
             this.label9 = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
             this.btnGoiTinhCuoc = new System.Windows.Forms.Button();
             this.btnTaoDon = new System.Windows.Forms.Button();
             this.btnLamMoi = new System.Windows.Forms.Button();
             this.btnThoat = new System.Windows.Forms.Button();
+            this.txtTenDV = new System.Windows.Forms.ComboBox();
             this.panel3.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -266,12 +266,12 @@
             // panel1
             // 
             this.panel1.BackColor = System.Drawing.SystemColors.Control;
+            this.panel1.Controls.Add(this.txtTenDV);
             this.panel1.Controls.Add(this.lblTongCuoc_HienThi);
             this.panel1.Controls.Add(this.txtCOD_HienThi);
             this.panel1.Controls.Add(this.label11);
             this.panel1.Controls.Add(this.txtKhoangCach_HienThi);
             this.panel1.Controls.Add(this.label10);
-            this.panel1.Controls.Add(this.txtTenDV);
             this.panel1.Controls.Add(this.label9);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel1.Location = new System.Drawing.Point(0, 346);
@@ -295,7 +295,7 @@
             this.txtCOD_HienThi.Margin = new System.Windows.Forms.Padding(4);
             this.txtCOD_HienThi.Name = "txtCOD_HienThi";
             this.txtCOD_HienThi.Size = new System.Drawing.Size(131, 22);
-            this.txtCOD_HienThi.TabIndex = 44;
+            this.txtCOD_HienThi.TabIndex = 3;
             // 
             // label11
             // 
@@ -313,7 +313,7 @@
             this.txtKhoangCach_HienThi.Margin = new System.Windows.Forms.Padding(4);
             this.txtKhoangCach_HienThi.Name = "txtKhoangCach_HienThi";
             this.txtKhoangCach_HienThi.Size = new System.Drawing.Size(131, 22);
-            this.txtKhoangCach_HienThi.TabIndex = 42;
+            this.txtKhoangCach_HienThi.TabIndex = 2;
             // 
             // label10
             // 
@@ -324,14 +324,6 @@
             this.label10.Size = new System.Drawing.Size(88, 16);
             this.label10.TabIndex = 41;
             this.label10.Text = "Khoảng cách:";
-            // 
-            // txtTenDV
-            // 
-            this.txtTenDV.Location = new System.Drawing.Point(301, 41);
-            this.txtTenDV.Margin = new System.Windows.Forms.Padding(4);
-            this.txtTenDV.Name = "txtTenDV";
-            this.txtTenDV.Size = new System.Drawing.Size(131, 22);
-            this.txtTenDV.TabIndex = 40;
             // 
             // label9
             // 
@@ -403,6 +395,14 @@
             this.btnThoat.UseVisualStyleBackColor = true;
             this.btnThoat.Click += new System.EventHandler(this.btnThoat_Click);
             // 
+            // txtTenDV
+            // 
+            this.txtTenDV.FormattingEnabled = true;
+            this.txtTenDV.Location = new System.Drawing.Point(301, 41);
+            this.txtTenDV.Name = "txtTenDV";
+            this.txtTenDV.Size = new System.Drawing.Size(131, 24);
+            this.txtTenDV.TabIndex = 1;
+            // 
             // frmTaoDon
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -415,6 +415,7 @@
             this.Name = "frmTaoDon";
             this.Text = "frmTaoDon";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
+            this.Load += new System.EventHandler(this.frmTaoDon_Load);
             this.panel3.ResumeLayout(false);
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
@@ -454,12 +455,12 @@
         private System.Windows.Forms.Label label11;
         private System.Windows.Forms.TextBox txtKhoangCach_HienThi;
         private System.Windows.Forms.Label label10;
-        private System.Windows.Forms.TextBox txtTenDV;
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.Button btnGoiTinhCuoc;
         private System.Windows.Forms.Button btnTaoDon;
         private System.Windows.Forms.Button btnLamMoi;
         private System.Windows.Forms.Button btnThoat;
+        private System.Windows.Forms.ComboBox txtTenDV;
     }
 }
