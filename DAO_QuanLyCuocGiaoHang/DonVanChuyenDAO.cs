@@ -12,24 +12,57 @@ namespace DAO_QuanLyCuocGiaoHang
     {
         public bool ThemDonHangMoi(DonVanChuyenDTO dh)
         {
-            // 1. Câu lệnh SQL khớp hoàn toàn với các Parameters ở dưới
-            string query = @"INSERT INTO DonVanChuyen 
-                     (MaDon, MaNguoiGui, MaNguoiNhan, MaDV, TrongLuong, ChieuDai, ChieuRong, ChieuCao, KhoangCach, TongCuoc, TrangThai, NgayTao) 
-                     VALUES 
-                     (@MaDon, @MaNguoiGui, @MaNguoiNhan, @MaDV, @TrongLuong, @ChieuDai, @ChieuRong, @ChieuCao, @KhoangCach, @TongCuoc, N'Chờ xử lý', GETDATE())";
+            string query = @"
+        -- 1. TỰ ĐỘNG TẠO MÃ ĐƠN (HD010, HD011...)
+        DECLARE @NextID INT = 10;
+        
+        SELECT TOP 1 @NextID = CAST(SUBSTRING(MaDon, 3, LEN(MaDon)) AS INT) + 1 
+        FROM DonVanChuyen 
+        WHERE MaDon LIKE 'HD%' AND ISNUMERIC(SUBSTRING(MaDon, 3, LEN(MaDon))) = 1
+        ORDER BY CAST(SUBSTRING(MaDon, 3, LEN(MaDon)) AS INT) DESC;
+
+        DECLARE @MaDonMoi VARCHAR(20) = 'HD' + RIGHT('000' + CAST(@NextID AS VARCHAR), 3);
+
+        -- 2. XỬ LÝ KHÁCH GỬI (Nếu trống -> Tạo mới, Nếu có mã -> Dùng mã cũ)
+        DECLARE @IDGui INT;
+        IF @MaKH = '' OR @MaKH = '-1' 
+        BEGIN
+            INSERT INTO KhachHang (HoTen, SDT, DiaChi) VALUES (@HoTenGui, @SDTGui, @DiaChiGui);
+            SET @IDGui = SCOPE_IDENTITY(); -- Lấy mã khách gửi vừa tạo
+        END
+        ELSE
+        BEGIN
+            SET @IDGui = CAST(@MaKH AS INT); -- Dùng mã do nhân viên gõ
+        END
+
+        -- 3. XỬ LÝ KHÁCH NHẬN (Luôn luôn tạo mới vì đây là địa chỉ đích)
+        INSERT INTO KhachHang (HoTen, SDT, DiaChi) VALUES (@HoTenNhan, @SDTNhan, @DiaChiNhan);
+        DECLARE @IDNhan INT = SCOPE_IDENTITY(); -- Lấy mã khách nhận vừa tạo
+
+        -- 4. LƯU VÀO ĐƠN VẬN CHUYỂN BẰNG 2 ID Ở TRÊN
+        INSERT INTO DonVanChuyen 
+        (MaDon, MaNguoiGui, MaNguoiNhan, MaDV, TrongLuong, ChieuDai, ChieuRong, ChieuCao, KhoangCach, TongCuoc, TrangThai, NgayTao) 
+        VALUES 
+        (@MaDonMoi, @IDGui, @IDNhan, @MaDV, @TrongLuong, @ChieuDai, @ChieuRong, @ChieuCao, @KhoangCach, @TongCuoc, N'Chưa xử lý', GETDATE());
+    ";
+
             try
             {
                 OpenConnection();
                 using (SqlCommand cmd = new SqlCommand(query, _conn))
                 {
-                    // 2. Phải thêm ĐỦ và ĐÚNG tên tham số như trong câu lệnh SQL ở trên
-                    cmd.Parameters.AddWithValue("@MaDon", "HD" + DateTime.Now.Ticks.ToString().Substring(10));
+                    // Tham số Khách Gửi
+                    cmd.Parameters.AddWithValue("@HoTenGui", dh.HoTenGui);
+                    cmd.Parameters.AddWithValue("@SDTGui", dh.SDTGui);
+                    cmd.Parameters.AddWithValue("@DiaChiGui", dh.DiaChiGui);
+                    cmd.Parameters.AddWithValue("@MaKH", string.IsNullOrEmpty(dh.MaKH) ? "" : dh.MaKH);
 
-                    // LƯU Ý: Đây là ID (INT), bạn phải có logic lấy ID từ tên khách hàng 
-                    // Nếu bảng DonVanChuyen của bạn đã được thiết kế lại để lưu tên trực tiếp, hãy đổi @MaNguoiGui thành @HoTenGui
-                    cmd.Parameters.AddWithValue("@MaNguoiGui", 1); // Thay 1 bằng biến ID thực tế của bạn
-                    cmd.Parameters.AddWithValue("@MaNguoiNhan", 2); // Thay 2 bằng biến ID thực tế của bạn
+                    // Tham số Khách Nhận
+                    cmd.Parameters.AddWithValue("@HoTenNhan", dh.HoTenNhan);
+                    cmd.Parameters.AddWithValue("@SDTNhan", dh.SDTNhan);
+                    cmd.Parameters.AddWithValue("@DiaChiNhan", dh.DiaChiNhan);
 
+                    // Tham số Đơn hàng
                     cmd.Parameters.AddWithValue("@MaDV", dh.MaDV);
                     cmd.Parameters.AddWithValue("@TrongLuong", dh.TrongLuong);
                     cmd.Parameters.AddWithValue("@ChieuDai", dh.ChieuDai);

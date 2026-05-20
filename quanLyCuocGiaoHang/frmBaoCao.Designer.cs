@@ -38,19 +38,17 @@
             this.dtpDenNgay = new System.Windows.Forms.DateTimePicker();
             this.dtpTuNgay = new System.Windows.Forms.DateTimePicker();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.panel1 = new System.Windows.Forms.Panel();
-            this.lblSoDonThanhCong = new System.Windows.Forms.Label();
-            this.lblTongSoDon = new System.Windows.Forms.Label();
-            this.lblTongDoanhThu = new System.Windows.Forms.Label();
-            this.dgvBaoCao = new System.Windows.Forms.DataGridView();
             this.panel2 = new System.Windows.Forms.Panel();
             this.btnXuatExcel = new System.Windows.Forms.Button();
             this.btnXuatPDF = new System.Windows.Forms.Button();
+            this.dgvBaoCao = new System.Windows.Forms.DataGridView();
+            this.lblSoDonThanhCong = new System.Windows.Forms.Label();
+            this.lblTongSoDon = new System.Windows.Forms.Label();
+            this.lblTongDoanhThu = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
-            this.panel1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvBaoCao)).BeginInit();
             this.panel2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvBaoCao)).BeginInit();
             this.SuspendLayout();
             // 
             // groupBox1
@@ -155,7 +153,6 @@
             // 
             // groupBox2
             // 
-            this.groupBox2.Controls.Add(this.panel1);
             this.groupBox2.Controls.Add(this.dgvBaoCao);
             this.groupBox2.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.groupBox2.Location = new System.Drawing.Point(4, 289);
@@ -167,61 +164,11 @@
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "2. Chi tiết dữ liệu";
             // 
-            // panel1
-            // 
-            this.panel1.Controls.Add(this.lblSoDonThanhCong);
-            this.panel1.Controls.Add(this.lblTongSoDon);
-            this.panel1.Controls.Add(this.lblTongDoanhThu);
-            this.panel1.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel1.Location = new System.Drawing.Point(4, 273);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(1505, 100);
-            this.panel1.TabIndex = 9;
-            // 
-            // lblSoDonThanhCong
-            // 
-            this.lblSoDonThanhCong.AutoSize = true;
-            this.lblSoDonThanhCong.Location = new System.Drawing.Point(998, 38);
-            this.lblSoDonThanhCong.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.lblSoDonThanhCong.Name = "lblSoDonThanhCong";
-            this.lblSoDonThanhCong.Size = new System.Drawing.Size(256, 29);
-            this.lblSoDonThanhCong.TabIndex = 10;
-            this.lblSoDonThanhCong.Text = "Số Đơn Thành Công :";
-            // 
-            // lblTongSoDon
-            // 
-            this.lblTongSoDon.AutoSize = true;
-            this.lblTongSoDon.Location = new System.Drawing.Point(124, 38);
-            this.lblTongSoDon.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.lblTongSoDon.Name = "lblTongSoDon";
-            this.lblTongSoDon.Size = new System.Drawing.Size(167, 29);
-            this.lblTongSoDon.TabIndex = 9;
-            this.lblTongSoDon.Text = "Tổng số đơn :";
-            // 
-            // lblTongDoanhThu
-            // 
-            this.lblTongDoanhThu.AutoSize = true;
-            this.lblTongDoanhThu.Location = new System.Drawing.Point(572, 38);
-            this.lblTongDoanhThu.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.lblTongDoanhThu.Name = "lblTongDoanhThu";
-            this.lblTongDoanhThu.Size = new System.Drawing.Size(215, 29);
-            this.lblTongDoanhThu.TabIndex = 8;
-            this.lblTongDoanhThu.Text = "Tổng Doanh Thu :";
-            // 
-            // dgvBaoCao
-            // 
-            this.dgvBaoCao.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvBaoCao.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dgvBaoCao.Location = new System.Drawing.Point(4, 33);
-            this.dgvBaoCao.Margin = new System.Windows.Forms.Padding(4);
-            this.dgvBaoCao.Name = "dgvBaoCao";
-            this.dgvBaoCao.RowHeadersWidth = 51;
-            this.dgvBaoCao.Size = new System.Drawing.Size(1505, 340);
-            this.dgvBaoCao.TabIndex = 8;
-            this.dgvBaoCao.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvBaoCao_CellContentClick);
-            // 
             // panel2
             // 
+            this.panel2.Controls.Add(this.lblSoDonThanhCong);
+            this.panel2.Controls.Add(this.lblTongSoDon);
+            this.panel2.Controls.Add(this.lblTongDoanhThu);
             this.panel2.Controls.Add(this.btnXuatExcel);
             this.panel2.Controls.Add(this.btnXuatPDF);
             this.panel2.Dock = System.Windows.Forms.DockStyle.Bottom;
@@ -256,6 +203,47 @@
             this.btnXuatPDF.UseVisualStyleBackColor = true;
             this.btnXuatPDF.Click += new System.EventHandler(this.btnXuatPDF_Click);
             // 
+            // dgvBaoCao
+            // 
+            this.dgvBaoCao.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvBaoCao.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dgvBaoCao.Location = new System.Drawing.Point(4, 33);
+            this.dgvBaoCao.Margin = new System.Windows.Forms.Padding(4);
+            this.dgvBaoCao.Name = "dgvBaoCao";
+            this.dgvBaoCao.RowHeadersWidth = 51;
+            this.dgvBaoCao.Size = new System.Drawing.Size(1505, 340);
+            this.dgvBaoCao.TabIndex = 11;
+            // 
+            // lblSoDonThanhCong
+            // 
+            this.lblSoDonThanhCong.AutoSize = true;
+            this.lblSoDonThanhCong.Location = new System.Drawing.Point(1131, 42);
+            this.lblSoDonThanhCong.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblSoDonThanhCong.Name = "lblSoDonThanhCong";
+            this.lblSoDonThanhCong.Size = new System.Drawing.Size(133, 16);
+            this.lblSoDonThanhCong.TabIndex = 17;
+            this.lblSoDonThanhCong.Text = "Số Đơn Thành Công :";
+            // 
+            // lblTongSoDon
+            // 
+            this.lblTongSoDon.AutoSize = true;
+            this.lblTongSoDon.Location = new System.Drawing.Point(257, 42);
+            this.lblTongSoDon.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblTongSoDon.Name = "lblTongSoDon";
+            this.lblTongSoDon.Size = new System.Drawing.Size(89, 16);
+            this.lblTongSoDon.TabIndex = 16;
+            this.lblTongSoDon.Text = "Tổng số đơn :";
+            // 
+            // lblTongDoanhThu
+            // 
+            this.lblTongDoanhThu.AutoSize = true;
+            this.lblTongDoanhThu.Location = new System.Drawing.Point(705, 42);
+            this.lblTongDoanhThu.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblTongDoanhThu.Name = "lblTongDoanhThu";
+            this.lblTongDoanhThu.Size = new System.Drawing.Size(114, 16);
+            this.lblTongDoanhThu.TabIndex = 15;
+            this.lblTongDoanhThu.Text = "Tổng Doanh Thu :";
+            // 
             // frmBaoCao
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -271,10 +259,9 @@
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.groupBox2.ResumeLayout(false);
-            this.panel1.ResumeLayout(false);
-            this.panel1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvBaoCao)).EndInit();
             this.panel2.ResumeLayout(false);
+            this.panel2.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvBaoCao)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -291,13 +278,12 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.ComboBox cboLoaiDichVu;
         private System.Windows.Forms.GroupBox groupBox2;
-        private System.Windows.Forms.DataGridView dgvBaoCao;
-        private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.Label lblSoDonThanhCong;
-        private System.Windows.Forms.Label lblTongSoDon;
-        private System.Windows.Forms.Label lblTongDoanhThu;
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.Button btnXuatExcel;
         private System.Windows.Forms.Button btnXuatPDF;
+        private System.Windows.Forms.DataGridView dgvBaoCao;
+        private System.Windows.Forms.Label lblSoDonThanhCong;
+        private System.Windows.Forms.Label lblTongSoDon;
+        private System.Windows.Forms.Label lblTongDoanhThu;
     }
 }

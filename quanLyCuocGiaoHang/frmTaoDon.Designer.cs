@@ -51,6 +51,7 @@
             this.lblTongCuoc_HienThi = new System.Windows.Forms.Label();
             this.txtCOD_HienThi = new System.Windows.Forms.TextBox();
             this.label11 = new System.Windows.Forms.Label();
+            this.txtTenDV = new System.Windows.Forms.TextBox();
             this.txtKhoangCach_HienThi = new System.Windows.Forms.TextBox();
             this.label10 = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
@@ -59,7 +60,7 @@
             this.btnTaoDon = new System.Windows.Forms.Button();
             this.btnLamMoi = new System.Windows.Forms.Button();
             this.btnThoat = new System.Windows.Forms.Button();
-            this.txtTenDV = new System.Windows.Forms.TextBox();
+            this.label12 = new System.Windows.Forms.Label();
             this.panel3.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -266,6 +267,7 @@
             // panel1
             // 
             this.panel1.BackColor = System.Drawing.SystemColors.Control;
+            this.panel1.Controls.Add(this.label12);
             this.panel1.Controls.Add(this.lblTongCuoc_HienThi);
             this.panel1.Controls.Add(this.txtCOD_HienThi);
             this.panel1.Controls.Add(this.label11);
@@ -282,7 +284,7 @@
             // lblTongCuoc_HienThi
             // 
             this.lblTongCuoc_HienThi.AutoSize = true;
-            this.lblTongCuoc_HienThi.Location = new System.Drawing.Point(479, 99);
+            this.lblTongCuoc_HienThi.Location = new System.Drawing.Point(603, 99);
             this.lblTongCuoc_HienThi.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblTongCuoc_HienThi.Name = "lblTongCuoc_HienThi";
             this.lblTongCuoc_HienThi.Size = new System.Drawing.Size(76, 16);
@@ -307,6 +309,15 @@
             this.label11.Size = new System.Drawing.Size(69, 16);
             this.label11.TabIndex = 43;
             this.label11.Text = "Tiền COD:";
+            // 
+            // txtTenDV
+            // 
+            this.txtTenDV.Location = new System.Drawing.Point(301, 41);
+            this.txtTenDV.Margin = new System.Windows.Forms.Padding(4);
+            this.txtTenDV.Name = "txtTenDV";
+            this.txtTenDV.ReadOnly = true;
+            this.txtTenDV.Size = new System.Drawing.Size(131, 22);
+            this.txtTenDV.TabIndex = 23;
             // 
             // txtKhoangCach_HienThi
             // 
@@ -369,7 +380,7 @@
             this.btnTaoDon.Name = "btnTaoDon";
             this.btnTaoDon.Size = new System.Drawing.Size(185, 63);
             this.btnTaoDon.TabIndex = 33;
-            this.btnTaoDon.Text = "Tạo Đơn Hàng ";
+            this.btnTaoDon.Text = "Tạo Đơn  ";
             this.btnTaoDon.UseVisualStyleBackColor = true;
             this.btnTaoDon.Click += new System.EventHandler(this.btnTaoDon_Click);
             // 
@@ -397,14 +408,15 @@
             this.btnThoat.UseVisualStyleBackColor = true;
             this.btnThoat.Click += new System.EventHandler(this.btnThoat_Click);
             // 
-            // txtTenDV
+            // label12
             // 
-            this.txtTenDV.Location = new System.Drawing.Point(301, 41);
-            this.txtTenDV.Margin = new System.Windows.Forms.Padding(4);
-            this.txtTenDV.Name = "txtTenDV";
-            this.txtTenDV.ReadOnly = true;
-            this.txtTenDV.Size = new System.Drawing.Size(131, 22);
-            this.txtTenDV.TabIndex = 23;
+            this.label12.AutoSize = true;
+            this.label12.Location = new System.Drawing.Point(479, 99);
+            this.label12.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(76, 16);
+            this.label12.TabIndex = 45;
+            this.label12.Text = "Tổng Cước:";
             // 
             // frmTaoDon
             // 
@@ -465,5 +477,6 @@
         private System.Windows.Forms.Button btnLamMoi;
         private System.Windows.Forms.Button btnThoat;
         private System.Windows.Forms.TextBox txtTenDV;
+        private System.Windows.Forms.Label label12;
     }
 }

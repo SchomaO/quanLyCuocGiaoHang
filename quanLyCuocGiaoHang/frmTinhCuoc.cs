@@ -111,7 +111,7 @@ namespace quanLyCuocGiaoHang
                 return;
             }
 
-            // 2. Lấy dữ liệu cước phí đang có trên màn hình
+            // 2. LẤY DỮ LIỆU CƯỚC PHÍ & KÍCH THƯỚC ĐANG CÓ TRÊN MÀN HÌNH
             string maDV = cboDichVu.SelectedValue.ToString();
             string tenDV = cboDichVu.Text;
             double khoangCach = Convert.ToDouble(txtKhoangCach.Text);
@@ -121,12 +121,18 @@ namespace quanLyCuocGiaoHang
             string chuoiTien = txtTongCuoc.Text.Replace(" VNĐ", "").Replace(",", "").Trim();
             double tongCuoc = Convert.ToDouble(chuoiTien);
 
+            // -------- BƯỚC 4: LẤY THÊM 4 THÔNG SỐ KIỆN HÀNG Ở ĐÂY --------
+            double trongLuong = Convert.ToDouble(txtTrongLuong.Text);
+            double dai = Convert.ToDouble(txtDai.Text);
+            double rong = Convert.ToDouble(txtRong.Text);
+            double cao = Convert.ToDouble(txtCao.Text);
+            // -------------------------------------------------------------
+
             // 3. XỬ LÝ THÔNG MINH 2 LUỒNG BẰNG BIẾN ĐÃ LƯU VẾT
             if (_formTaoDonGoc != null && !_formTaoDonGoc.IsDisposed)
             {
-                // TRƯỜNG HỢP 1: Form Tạo Đơn gốc vẫn còn sống nhăn răng trong bộ nhớ
-                // -> Trả dữ liệu thẳng về và lôi nó đè lên Panel
-                _formTaoDonGoc.NhanDuLieuTuFormTinhCuoc(maDV, tenDV, khoangCach, tienCOD, tongCuoc);
+                // TRƯỜNG HỢP 1: TRUYỀN ĐỦ 9 THAM SỐ VỀ FORM GỐC
+                _formTaoDonGoc.NhanDuLieuTuFormTinhCuoc(maDV, tenDV, khoangCach, tienCOD, tongCuoc, trongLuong, dai, rong, cao);
 
                 frmMain formChinh = Application.OpenForms["frmMain"] as frmMain;
                 if (formChinh != null)
@@ -136,8 +142,7 @@ namespace quanLyCuocGiaoHang
             }
             else
             {
-                // TRƯỜNG HỢP 2: _formTaoDonGoc bằng null HOẶC đã bị đóng/hủy mất rồi (IsDisposed == true)
-                // -> Hiện thông báo hỏi xem có muốn tạo một Form Tạo Đơn MỚI TINH không
+                // TRƯỜNG HỢP 2: TẠO FORM MỚI VÀ CŨNG TRUYỀN ĐỦ 9 THAM SỐ
                 DialogResult dr = MessageBox.Show("Bạn có muốn dùng cước phí này để tạo một đơn hàng mới luôn không?",
                                                   "Chuyển sang Tạo Đơn",
                                                   MessageBoxButtons.YesNo,
@@ -147,9 +152,10 @@ namespace quanLyCuocGiaoHang
                     frmMain formChinh = Application.OpenForms["frmMain"] as frmMain;
                     if (formChinh != null)
                     {
-                        // Tạo hẳn một form mới tinh chứ không xài con trỏ cũ đã chết nữa
                         frmTaoDon frmMoi = new frmTaoDon();
-                        frmMoi.NhanDuLieuTuFormTinhCuoc(maDV, tenDV, khoangCach, tienCOD, tongCuoc);
+
+                        // Truyền đủ 9 tham số vào form mới
+                        frmMoi.NhanDuLieuTuFormTinhCuoc(maDV, tenDV, khoangCach, tienCOD, tongCuoc, trongLuong, dai, rong, cao);
                         formChinh.MoFormCon(frmMoi);
                     }
                 }
