@@ -42,6 +42,7 @@ namespace quanLyCuocGiaoHang
         }
         private void btnTaoDon_Click(object sender, EventArgs e)
         {
+            btnTaoDon.Enabled = false;
             try
             {
                 // 1. Kiểm tra an toàn: Bắt buộc phải tính cước thì mới có Mã Dịch Vụ ẩn
@@ -87,11 +88,10 @@ namespace quanLyCuocGiaoHang
                     ChieuCao = _chieuCaoAn
                 };
 
-                // 4. Gọi BUS xử lý
                 if (_donHangBUS.TaoDonHang(donMoi))
                 {
-                    MessageBox.Show("Tạo đơn hàng thành công! (Mã tự động tăng)", "Thành công", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    btnLamMoi_Click(null, null);
+                    MessageBox.Show("Tạo đơn hàng thành công!", "Thành công", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    btnLamMoi_Click(null, null); // Nút này đã làm tốt nhiệm vụ dọn sạch chữ trên giao diện
                 }
             }
             catch (ArgumentException ex)
@@ -101,6 +101,12 @@ namespace quanLyCuocGiaoHang
             catch (Exception ex)
             {
                 MessageBox.Show("Lỗi hệ thống: " + ex.Message, "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            finally
+            {
+                // BẠN THÊM 4 DÒNG NÀY VÀO CUỐI CÙNG NHÉ!
+                // Dù tạo đơn thành công hay bị lỗi thì cũng phải mở lại nút bấm cho người ta làm tiếp
+                btnTaoDon.Enabled = true;
             }
         }
 

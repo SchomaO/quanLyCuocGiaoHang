@@ -13,38 +13,46 @@ namespace DAO_QuanLyCuocGiaoHang
         public bool ThemDonHangMoi(DonVanChuyenDTO dh)
         {
             string query = @"
-        -- 1. TỰ ĐỘNG TẠO MÃ ĐƠN (HD010, HD011...)
-        DECLARE @NextID INT = 10;
-        
-        SELECT TOP 1 @NextID = CAST(SUBSTRING(MaDon, 3, LEN(MaDon)) AS INT) + 1 
-        FROM DonVanChuyen 
-        WHERE MaDon LIKE 'HD%' AND ISNUMERIC(SUBSTRING(MaDon, 3, LEN(MaDon))) = 1
-        ORDER BY CAST(SUBSTRING(MaDon, 3, LEN(MaDon)) AS INT) DESC;
+    -- 1. TÌM MÃ ĐƠN HÀNG LỚN NHẤT HIỆN CÓ
+    DECLARE @NextID INT = 0;
+    
+    SELECT @NextID = ISNULL(MAX(CAST(SUBSTRING(MaDon, 3, 20) AS INT)), 0)
+    FROM DonVanChuyen 
+    WHERE MaDon LIKE 'HD%' AND ISNUMERIC(SUBSTRING(MaDon, 3, 20)) = 1;
 
-        DECLARE @MaDonMoi VARCHAR(20) = 'HD' + RIGHT('000' + CAST(@NextID AS VARCHAR), 3);
+    SET @NextID = @NextID + 1;
+    DECLARE @MaDonMoi VARCHAR(20) = 'HD' + RIGHT('000' + CAST(@NextID AS VARCHAR), 3);
 
-        -- 2. XỬ LÝ KHÁCH GỬI (Nếu trống -> Tạo mới, Nếu có mã -> Dùng mã cũ)
-        DECLARE @IDGui INT;
-        IF @MaKH = '' OR @MaKH = '-1' 
-        BEGIN
-            INSERT INTO KhachHang (HoTen, SDT, DiaChi) VALUES (@HoTenGui, @SDTGui, @DiaChiGui);
-            SET @IDGui = SCOPE_IDENTITY(); -- Lấy mã khách gửi vừa tạo
-        END
-        ELSE
-        BEGIN
-            SET @IDGui = CAST(@MaKH AS INT); -- Dùng mã do nhân viên gõ
-        END
+    -- VÒNG LẶP CHỐNG TRÙNG LẶP (Chìa khóa sửa lỗi)
+    -- Nếu phát hiện mã đã tồn tại, tự động cộng thêm 1 số nữa
+    WHILE EXISTS (SELECT 1 FROM DonVanChuyen WHERE MaDon = @MaDonMoi)
+    BEGIN
+        SET @NextID = @NextID + 1;
+        SET @MaDonMoi = 'HD' + RIGHT('000' + CAST(@NextID AS VARCHAR), 3);
+    END
 
-        -- 3. XỬ LÝ KHÁCH NHẬN (Luôn luôn tạo mới vì đây là địa chỉ đích)
-        INSERT INTO KhachHang (HoTen, SDT, DiaChi) VALUES (@HoTenNhan, @SDTNhan, @DiaChiNhan);
-        DECLARE @IDNhan INT = SCOPE_IDENTITY(); -- Lấy mã khách nhận vừa tạo
+    -- 2. XỬ LÝ KHÁCH GỬI (Nếu trống -> Tạo mới, Nếu có mã -> Dùng mã cũ)
+    DECLARE @IDGui INT;
+    IF @MaKH = '' OR @MaKH = '-1' 
+    BEGIN
+        INSERT INTO KhachHang (HoTen, SDT, DiaChi) VALUES (@HoTenGui, @SDTGui, @DiaChiGui);
+        SET @IDGui = SCOPE_IDENTITY();
+    END
+    ELSE
+    BEGIN
+        SET @IDGui = CAST(@MaKH AS INT);
+    END
 
-        -- 4. LƯU VÀO ĐƠN VẬN CHUYỂN BẰNG 2 ID Ở TRÊN
-        INSERT INTO DonVanChuyen 
-        (MaDon, MaNguoiGui, MaNguoiNhan, MaDV, TrongLuong, ChieuDai, ChieuRong, ChieuCao, KhoangCach, TongCuoc, TrangThai, NgayTao) 
-        VALUES 
-        (@MaDonMoi, @IDGui, @IDNhan, @MaDV, @TrongLuong, @ChieuDai, @ChieuRong, @ChieuCao, @KhoangCach, @TongCuoc, N'Chưa xử lý', GETDATE());
-    ";
+    -- 3. XỬ LÝ KHÁCH NHẬN (Luôn tạo mới)
+    INSERT INTO KhachHang (HoTen, SDT, DiaChi) VALUES (@HoTenNhan, @SDTNhan, @DiaChiNhan);
+    DECLARE @IDNhan INT = SCOPE_IDENTITY();
+
+    -- 4. LƯU VÀO ĐƠN VẬN CHUYỂN
+    INSERT INTO DonVanChuyen 
+    (MaDon, MaNguoiGui, MaNguoiNhan, MaDV, TrongLuong, ChieuDai, ChieuRong, ChieuCao, KhoangCach, TongCuoc, TrangThai, NgayTao) 
+    VALUES 
+    (@MaDonMoi, @IDGui, @IDNhan, @MaDV, @TrongLuong, @ChieuDai, @ChieuRong, @ChieuCao, @KhoangCach, @TongCuoc, N'Chưa xử lý', GETDATE());
+";
 
             try
             {
