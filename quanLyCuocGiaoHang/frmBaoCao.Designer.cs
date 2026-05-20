@@ -38,18 +38,18 @@
             this.dtpDenNgay = new System.Windows.Forms.DateTimePicker();
             this.dtpTuNgay = new System.Windows.Forms.DateTimePicker();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.dgvBaoCao = new System.Windows.Forms.DataGridView();
             this.panel1 = new System.Windows.Forms.Panel();
             this.lblSoDonThanhCong = new System.Windows.Forms.Label();
             this.lblTongSoDon = new System.Windows.Forms.Label();
             this.lblTongDoanhThu = new System.Windows.Forms.Label();
+            this.dgvBaoCao = new System.Windows.Forms.DataGridView();
             this.panel2 = new System.Windows.Forms.Panel();
-            this.btnXuatPDF = new System.Windows.Forms.Button();
             this.btnXuatExcel = new System.Windows.Forms.Button();
+            this.btnXuatPDF = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvBaoCao)).BeginInit();
             this.panel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvBaoCao)).BeginInit();
             this.panel2.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -65,9 +65,9 @@
             this.groupBox1.Controls.Add(this.dtpTuNgay);
             this.groupBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.groupBox1.Location = new System.Drawing.Point(4, 1);
-            this.groupBox1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.groupBox1.Margin = new System.Windows.Forms.Padding(4);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.groupBox1.Padding = new System.Windows.Forms.Padding(4);
             this.groupBox1.Size = new System.Drawing.Size(1513, 281);
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
@@ -111,7 +111,7 @@
             "Nhanh ",
             "Hỏa Tốc"});
             this.cboLoaiDichVu.Location = new System.Drawing.Point(360, 167);
-            this.cboLoaiDichVu.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.cboLoaiDichVu.Margin = new System.Windows.Forms.Padding(4);
             this.cboLoaiDichVu.Name = "cboLoaiDichVu";
             this.cboLoaiDichVu.Size = new System.Drawing.Size(340, 37);
             this.cboLoaiDichVu.TabIndex = 5;
@@ -129,7 +129,7 @@
             // btnXemBaoCao
             // 
             this.btnXemBaoCao.Location = new System.Drawing.Point(941, 153);
-            this.btnXemBaoCao.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnXemBaoCao.Margin = new System.Windows.Forms.Padding(4);
             this.btnXemBaoCao.Name = "btnXemBaoCao";
             this.btnXemBaoCao.Size = new System.Drawing.Size(241, 66);
             this.btnXemBaoCao.TabIndex = 3;
@@ -140,7 +140,7 @@
             // dtpDenNgay
             // 
             this.dtpDenNgay.Location = new System.Drawing.Point(941, 64);
-            this.dtpDenNgay.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.dtpDenNgay.Margin = new System.Windows.Forms.Padding(4);
             this.dtpDenNgay.Name = "dtpDenNgay";
             this.dtpDenNgay.Size = new System.Drawing.Size(472, 36);
             this.dtpDenNgay.TabIndex = 1;
@@ -148,7 +148,7 @@
             // dtpTuNgay
             // 
             this.dtpTuNgay.Location = new System.Drawing.Point(360, 64);
-            this.dtpTuNgay.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.dtpTuNgay.Margin = new System.Windows.Forms.Padding(4);
             this.dtpTuNgay.Name = "dtpTuNgay";
             this.dtpTuNgay.Size = new System.Drawing.Size(472, 36);
             this.dtpTuNgay.TabIndex = 0;
@@ -159,25 +159,13 @@
             this.groupBox2.Controls.Add(this.dgvBaoCao);
             this.groupBox2.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.groupBox2.Location = new System.Drawing.Point(4, 289);
-            this.groupBox2.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.groupBox2.Margin = new System.Windows.Forms.Padding(4);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.groupBox2.Padding = new System.Windows.Forms.Padding(4);
             this.groupBox2.Size = new System.Drawing.Size(1513, 377);
             this.groupBox2.TabIndex = 9;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "2. Chi tiết dữ liệu";
-            // 
-            // dgvBaoCao
-            // 
-            this.dgvBaoCao.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvBaoCao.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dgvBaoCao.Location = new System.Drawing.Point(4, 33);
-            this.dgvBaoCao.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.dgvBaoCao.Name = "dgvBaoCao";
-            this.dgvBaoCao.RowHeadersWidth = 51;
-            this.dgvBaoCao.Size = new System.Drawing.Size(1505, 340);
-            this.dgvBaoCao.TabIndex = 8;
-            this.dgvBaoCao.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvBaoCao_CellContentClick);
             // 
             // panel1
             // 
@@ -220,6 +208,18 @@
             this.lblTongDoanhThu.TabIndex = 8;
             this.lblTongDoanhThu.Text = "Tổng Doanh Thu :";
             // 
+            // dgvBaoCao
+            // 
+            this.dgvBaoCao.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvBaoCao.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dgvBaoCao.Location = new System.Drawing.Point(4, 33);
+            this.dgvBaoCao.Margin = new System.Windows.Forms.Padding(4);
+            this.dgvBaoCao.Name = "dgvBaoCao";
+            this.dgvBaoCao.RowHeadersWidth = 51;
+            this.dgvBaoCao.Size = new System.Drawing.Size(1505, 340);
+            this.dgvBaoCao.TabIndex = 8;
+            this.dgvBaoCao.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvBaoCao_CellContentClick);
+            // 
             // panel2
             // 
             this.panel2.Controls.Add(this.btnXuatExcel);
@@ -229,19 +229,6 @@
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(1520, 100);
             this.panel2.TabIndex = 10;
-            // 
-            // btnXuatPDF
-            // 
-            this.btnXuatPDF.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnXuatPDF.Cursor = System.Windows.Forms.Cursors.Default;
-            this.btnXuatPDF.Location = new System.Drawing.Point(1192, 5);
-            this.btnXuatPDF.Margin = new System.Windows.Forms.Padding(4);
-            this.btnXuatPDF.Name = "btnXuatPDF";
-            this.btnXuatPDF.Size = new System.Drawing.Size(170, 66);
-            this.btnXuatPDF.TabIndex = 4;
-            this.btnXuatPDF.Text = "Xuất PDF";
-            this.btnXuatPDF.UseVisualStyleBackColor = true;
-            this.btnXuatPDF.Click += new System.EventHandler(this.btnXuatPDF_Click);
             // 
             // btnXuatExcel
             // 
@@ -256,6 +243,19 @@
             this.btnXuatExcel.UseVisualStyleBackColor = true;
             this.btnXuatExcel.Click += new System.EventHandler(this.btnXuatExcel_Click);
             // 
+            // btnXuatPDF
+            // 
+            this.btnXuatPDF.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnXuatPDF.Cursor = System.Windows.Forms.Cursors.Default;
+            this.btnXuatPDF.Location = new System.Drawing.Point(1192, 5);
+            this.btnXuatPDF.Margin = new System.Windows.Forms.Padding(4);
+            this.btnXuatPDF.Name = "btnXuatPDF";
+            this.btnXuatPDF.Size = new System.Drawing.Size(170, 66);
+            this.btnXuatPDF.TabIndex = 4;
+            this.btnXuatPDF.Text = "Xuất PDF";
+            this.btnXuatPDF.UseVisualStyleBackColor = true;
+            this.btnXuatPDF.Click += new System.EventHandler(this.btnXuatPDF_Click);
+            // 
             // frmBaoCao
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -264,16 +264,16 @@
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "frmBaoCao";
             this.Text = "frmBaoCao";
             this.Load += new System.EventHandler(this.frmBaoCao_Load);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.groupBox2.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.dgvBaoCao)).EndInit();
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvBaoCao)).EndInit();
             this.panel2.ResumeLayout(false);
             this.ResumeLayout(false);
 

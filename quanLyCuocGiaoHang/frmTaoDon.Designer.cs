@@ -59,7 +59,7 @@
             this.btnTaoDon = new System.Windows.Forms.Button();
             this.btnLamMoi = new System.Windows.Forms.Button();
             this.btnThoat = new System.Windows.Forms.Button();
-            this.txtTenDV = new System.Windows.Forms.ComboBox();
+            this.txtTenDV = new System.Windows.Forms.TextBox();
             this.panel3.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -266,10 +266,10 @@
             // panel1
             // 
             this.panel1.BackColor = System.Drawing.SystemColors.Control;
-            this.panel1.Controls.Add(this.txtTenDV);
             this.panel1.Controls.Add(this.lblTongCuoc_HienThi);
             this.panel1.Controls.Add(this.txtCOD_HienThi);
             this.panel1.Controls.Add(this.label11);
+            this.panel1.Controls.Add(this.txtTenDV);
             this.panel1.Controls.Add(this.txtKhoangCach_HienThi);
             this.panel1.Controls.Add(this.label10);
             this.panel1.Controls.Add(this.label9);
@@ -296,7 +296,7 @@
             this.txtCOD_HienThi.Name = "txtCOD_HienThi";
             this.txtCOD_HienThi.ReadOnly = true;
             this.txtCOD_HienThi.Size = new System.Drawing.Size(131, 22);
-            this.txtCOD_HienThi.TabIndex = 3;
+            this.txtCOD_HienThi.TabIndex = 32;
             // 
             // label11
             // 
@@ -315,7 +315,7 @@
             this.txtKhoangCach_HienThi.Name = "txtKhoangCach_HienThi";
             this.txtKhoangCach_HienThi.ReadOnly = true;
             this.txtKhoangCach_HienThi.Size = new System.Drawing.Size(131, 22);
-            this.txtKhoangCach_HienThi.TabIndex = 2;
+            this.txtKhoangCach_HienThi.TabIndex = 23;
             // 
             // label10
             // 
@@ -399,11 +399,12 @@
             // 
             // txtTenDV
             // 
-            this.txtTenDV.FormattingEnabled = true;
             this.txtTenDV.Location = new System.Drawing.Point(301, 41);
+            this.txtTenDV.Margin = new System.Windows.Forms.Padding(4);
             this.txtTenDV.Name = "txtTenDV";
-            this.txtTenDV.Size = new System.Drawing.Size(131, 24);
-            this.txtTenDV.TabIndex = 1;
+            this.txtTenDV.ReadOnly = true;
+            this.txtTenDV.Size = new System.Drawing.Size(131, 22);
+            this.txtTenDV.TabIndex = 23;
             // 
             // frmTaoDon
             // 
@@ -463,6 +464,6 @@
         private System.Windows.Forms.Button btnTaoDon;
         private System.Windows.Forms.Button btnLamMoi;
         private System.Windows.Forms.Button btnThoat;
-        private System.Windows.Forms.ComboBox txtTenDV;
+        private System.Windows.Forms.TextBox txtTenDV;
     }
 }
