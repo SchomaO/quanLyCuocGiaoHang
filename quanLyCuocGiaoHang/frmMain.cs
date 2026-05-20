@@ -85,7 +85,7 @@ namespace quanLyCuocGiaoHang
             {
                 // Nếu là nhân viên, ẨN nút Quản lý giá cước và Báo cáo
                 btnQuanLyGiaCuoc.Visible = false;
-                btnReport.Visible = false;
+              
             }
             else if (QuyenNguoiDung == "Admin")
             {
