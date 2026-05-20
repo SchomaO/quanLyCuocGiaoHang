@@ -27,6 +27,7 @@ namespace quanLyCuocGiaoHang
         private void LoadDanhSach()
         {
             dgvKhachHang.DataSource = busKH.GetKhachHang();
+            DoiTenCot(); 
         }
         private void ResetForm()
         {
@@ -44,7 +45,15 @@ namespace quanLyCuocGiaoHang
 
         private void btnLamMoi_Click(object sender, EventArgs e)
         {
+           
+            // 1. Xóa chữ đang nhập dở trong ô tìm kiếm
+            txtTimKiem.Clear();
+
+            // 2. Dọn sạch các ô TextBox nhập liệu bên dưới (Họ tên, SĐT...) và reset nút
             ResetForm();
+
+            // 3. Gọi lại hàm này để ép cái bảng load lại toàn bộ danh sách từ Database
+            LoadDanhSach();
         }
 
         private void txtThem_Click(object sender, EventArgs e)
@@ -63,7 +72,24 @@ namespace quanLyCuocGiaoHang
                 MessageBox.Show("Thêm thất bại. Vui lòng kiểm tra lại thông tin!", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
+        private void DoiTenCot()
+        {
+            // Kiểm tra xem bảng đã có cột nào chưa để tránh lỗi
+            if (dgvKhachHang.Columns.Count > 0)
+            {
+                // 1. Đổi tên hiển thị (HeaderText)
+                dgvKhachHang.Columns["MaKH"].HeaderText = "Mã KH";
+                dgvKhachHang.Columns["HoTen"].HeaderText = "Họ và Tên";
+                dgvKhachHang.Columns["SDT"].HeaderText = "Số Điện Thoại";
+                dgvKhachHang.Columns["DiaChi"].HeaderText = "Địa Chỉ Liên Hệ";
 
+                // 2. (Tùy chọn) Chỉnh lại độ rộng các cột cho cân đối với form
+                dgvKhachHang.Columns["MaKH"].Width = 80;
+                dgvKhachHang.Columns["HoTen"].Width = 180;
+                dgvKhachHang.Columns["SDT"].Width = 120;
+                dgvKhachHang.Columns["DiaChi"].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill; // Ép cột Địa chỉ giãn đầy khoảng trống còn lại
+            }
+        }
         private void dgvKhachHang_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             // Tránh lỗi click vào tiêu đề cột (Header)
@@ -87,9 +113,9 @@ namespace quanLyCuocGiaoHang
         private void btnTimKiem_Click(object sender, EventArgs e)
         {
             string tuKhoa = txtTimKiem.Text;
-
             // Đẩy xuống BUS để lấy Data và gắn trực tiếp vào bảng
             dgvKhachHang.DataSource = busKH.SearchKhachHang(tuKhoa);
+            DoiTenCot(); // Thêm dòng này vào
         }
 
         private void btnSua_Click(object sender, EventArgs e)
