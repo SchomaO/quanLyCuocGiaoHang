@@ -95,9 +95,12 @@ namespace quanLyCuocGiaoHang
 
         private void btnGoiTinhCuoc_Click(object sender, EventArgs e)
         {
-            frmTinhCuoc fTinhCuoc = new frmTinhCuoc();
-            fTinhCuoc.Owner = this; // Gán form Tạo Đơn làm chủ để form Tính cước tìm thấy đường gửi lời gọi về
-            fTinhCuoc.ShowDialog(); // Mở khóa màn hình Dialog độc lập
+            frmMain fMain = (frmMain)Application.OpenForms["frmMain"];
+            if (fMain != null)
+            {
+                // Nạp 'this' (chính là Form Tạo Đơn hiện tại) vào trong ruột frmTinhCuoc
+                fMain.MoFormCon(new frmTinhCuoc(this));
+            }
         }
     }
 }

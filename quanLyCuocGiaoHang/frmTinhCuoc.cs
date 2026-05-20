@@ -14,11 +14,16 @@ namespace quanLyCuocGiaoHang
     public partial class frmTinhCuoc : Form
     {
         BUS_DichVu busDV = new BUS_DichVu();
+        private frmTaoDon _formTaoDonGoc = null;
         public frmTinhCuoc()
         {
             InitializeComponent();
         }
-
+        public frmTinhCuoc(frmTaoDon formGoc)
+        {
+            InitializeComponent();
+            _formTaoDonGoc = formGoc; // Lưu lại vết của form Tạo Đơn đang đứng đợi
+        }
         private void groupBox2_Enter(object sender, EventArgs e)
         {
 
@@ -116,44 +121,36 @@ namespace quanLyCuocGiaoHang
             string chuoiTien = txtTongCuoc.Text.Replace(" VNĐ", "").Replace(",", "").Trim();
             double tongCuoc = Convert.ToDouble(chuoiTien);
 
-            // 3. XỬ LÝ THÔNG MINH 2 LUỒNG
-            frmTaoDon fTaoDon = this.Owner as frmTaoDon;
-
-            if (fTaoDon != null)
+            // 3. XỬ LÝ THÔNG MINH 2 LUỒNG BẰNG BIẾN ĐÃ LƯU VẾT
+            if (_formTaoDonGoc != null && !_formTaoDonGoc.IsDisposed)
             {
-                // TRƯỜNG HỢP 1: Form Tính Cước được gọi TỪ FORM TẠO ĐƠN (Trả dữ liệu về form cũ)
-                fTaoDon.NhanDuLieuTuFormTinhCuoc(maDV, tenDV, khoangCach, tienCOD, tongCuoc);
-                this.Close(); // Truyền xong thì đóng form tính cước lại
+                // TRƯỜNG HỢP 1: Form Tạo Đơn gốc vẫn còn sống nhăn răng trong bộ nhớ
+                // -> Trả dữ liệu thẳng về và lôi nó đè lên Panel
+                _formTaoDonGoc.NhanDuLieuTuFormTinhCuoc(maDV, tenDV, khoangCach, tienCOD, tongCuoc);
+
+                frmMain formChinh = Application.OpenForms["frmMain"] as frmMain;
+                if (formChinh != null)
+                {
+                    formChinh.MoFormCon(_formTaoDonGoc);
+                }
             }
             else
             {
-                // TRƯỜNG HỢP 2: Form Tính Cước được mở ĐỘC LẬP TỪ MENU CHÍNH (Đang nằm trong Panel)
-                DialogResult dr = MessageBox.Show("Bạn có muốn dùng cước phí này để tạo đơn hàng mới luôn không?",
+                // TRƯỜNG HỢP 2: _formTaoDonGoc bằng null HOẶC đã bị đóng/hủy mất rồi (IsDisposed == true)
+                // -> Hiện thông báo hỏi xem có muốn tạo một Form Tạo Đơn MỚI TINH không
+                DialogResult dr = MessageBox.Show("Bạn có muốn dùng cước phí này để tạo một đơn hàng mới luôn không?",
                                                   "Chuyển sang Tạo Đơn",
                                                   MessageBoxButtons.YesNo,
                                                   MessageBoxIcon.Question);
                 if (dr == DialogResult.Yes)
                 {
-                    // Tìm chính xác cái Form Chính (frmMain) đang chạy của chương trình
                     frmMain formChinh = Application.OpenForms["frmMain"] as frmMain;
-
                     if (formChinh != null)
                     {
-                        // Tạo ra một form Tạo Đơn mới tinh
+                        // Tạo hẳn một form mới tinh chứ không xài con trỏ cũ đã chết nữa
                         frmTaoDon frmMoi = new frmTaoDon();
-
-                        // Nhét trước dữ liệu cước phí vào form Tạo Đơn đó (Tự động điền vào lblTongCuoc_HienThi)
                         frmMoi.NhanDuLieuTuFormTinhCuoc(maDV, tenDV, khoangCach, tienCOD, tongCuoc);
-
-                        // Ra lệnh cho Form Chính nhúng cái frmMoi này vào Panel bên phải để che form tính cước đi
                         formChinh.MoFormCon(frmMoi);
-                    }
-                    else
-                    {
-                        // Phương án dự phòng nếu chạy kiểm thử không mở qua frmMain
-                        frmTaoDon frmMoi = new frmTaoDon();
-                        frmMoi.NhanDuLieuTuFormTinhCuoc(maDV, tenDV, khoangCach, tienCOD, tongCuoc);
-                        frmMoi.ShowDialog();
                     }
                 }
             }

@@ -105,14 +105,21 @@ namespace quanLyCuocGiaoHang
         // Hàm dùng chung để nhúng các form chức năng (Giao hàng, Theo dõi...)
         public void MoFormCon(Form formCon)
         {
+            // 1. Thay vì .Close(), ta chỉ gỡ Form cũ ra khỏi Panel để giữ mạng cho nó
             if (panelMain.Controls.Count > 0)
             {
-                panelMain.Controls[0].Dispose();
+                panelMain.Controls.Clear(); // Chỉ xóa Control hiển thị trên Panel chứ không xóa Object trong bộ nhớ
             }
+
+            // 2. Cấu hình Form con mới chuẩn bị nhúng vào
             formCon.TopLevel = false;
             formCon.FormBorderStyle = FormBorderStyle.None;
             formCon.Dock = DockStyle.Fill;
+
+            // 3. Đổ Form con vào Panel và hiển thị lên màn hình
             panelMain.Controls.Add(formCon);
+            panelMain.Tag = formCon;
+            formCon.BringToFront();
             formCon.Show();
         }
         // Sự kiện Click các nút trên Menu
