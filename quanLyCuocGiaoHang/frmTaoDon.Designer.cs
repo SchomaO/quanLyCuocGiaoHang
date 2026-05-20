@@ -294,6 +294,7 @@
             this.txtCOD_HienThi.Location = new System.Drawing.Point(663, 38);
             this.txtCOD_HienThi.Margin = new System.Windows.Forms.Padding(4);
             this.txtCOD_HienThi.Name = "txtCOD_HienThi";
+            this.txtCOD_HienThi.ReadOnly = true;
             this.txtCOD_HienThi.Size = new System.Drawing.Size(131, 22);
             this.txtCOD_HienThi.TabIndex = 3;
             // 
@@ -312,6 +313,7 @@
             this.txtKhoangCach_HienThi.Location = new System.Drawing.Point(301, 93);
             this.txtKhoangCach_HienThi.Margin = new System.Windows.Forms.Padding(4);
             this.txtKhoangCach_HienThi.Name = "txtKhoangCach_HienThi";
+            this.txtKhoangCach_HienThi.ReadOnly = true;
             this.txtKhoangCach_HienThi.Size = new System.Drawing.Size(131, 22);
             this.txtKhoangCach_HienThi.TabIndex = 2;
             // 
